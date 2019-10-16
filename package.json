@@ -1,0 +1,44 @@
+{
+  "name": "dominguesgm.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dominguesgm/dominguesgm.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dominguesgm/dominguesgm.github.io/issues"
+  },
+  "homepage": "https://github.com/dominguesgm/dominguesgm.github.io#readme",
+  "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "next": "^9.1.1",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "browserlist": "^1.0.1",
+    "eslint": "^6.5.1",
+    "eslint-plugin-react": "^7.16.0",
+    "postcss-color-function": "^4.1.0",
+    "postcss-import": "^12.0.1",
+    "postcss-mixins": "^6.2.2",
+    "postcss-preset-env": "^6.7.0",
+    "postcss-url": "^8.0.0",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^19.0.0"
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}
