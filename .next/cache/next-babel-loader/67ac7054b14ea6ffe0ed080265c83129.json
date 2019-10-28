@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from '../src/pages/app';","map":{"version":3,"sources":["/Users/gildomingues/homebrew/personal-website/dominguesgm.github.io/pages/_app.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,kBAAxB","sourcesContent":["export { default } from '../src/pages/app';\n"]},"metadata":{},"sourceType":"module"}
