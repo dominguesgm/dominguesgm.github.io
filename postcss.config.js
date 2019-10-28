@@ -1,7 +1,6 @@
 module.exports = {
 	'plugins': [
 		require('postcss-import'),
-		require('postcss-url'),
 		require('postcss-mixins'),
 		require('postcss-preset-env')({
 			browsers: 'defaults',
