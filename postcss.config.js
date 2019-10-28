@@ -1,8 +1,7 @@
 module.exports = {
 	'plugins': [
-		'postcss-import',
-		'postcss-url',
-		'postcss-mixins',
+		require('postcss-import'),
+		require('postcss-mixins'),
 		require('postcss-preset-env')({
 			browsers: 'defaults',
 			stage: 3,
@@ -27,6 +26,6 @@ module.exports = {
 				overrideBrowserslist: 'defaults',
 			},
 		}),
-		'postcss-color-function',
+		require('postcss-color-function'),
 	],
 };
