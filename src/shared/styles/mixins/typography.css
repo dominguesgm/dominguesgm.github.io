@@ -1,0 +1,53 @@
+/***
+ Define font family mixins
+***/
+
+@define-mixin font-league $weight: 700 {
+    font-family: 'LeagueSpartan', sans;
+    font-weight: $(weight);
+}
+
+@define-mixin font-montserrat $weight: 400 {
+    font-family: 'Montserrat', sans;
+    font-weight: $(weight);
+}
+
+/***
+ Define typography mixins
+***/
+
+@define-mixin typography-h1 $unit: rem {
+    @mixin font-league 700;
+    font-size: 9$(unit);
+    line-height: 1.5;
+}
+
+@define-mixin typography-h2 $unit: rem {
+    @mixin font-montserrat 700;
+    font-size: 6.4$(unit);
+    line-height: 1.5;
+}
+
+@define-mixin typography-h3 $unit: rem {
+    @mixin font-montserrat 700;
+    font-size: 4.5$(unit);
+    line-height: 1.5;
+}
+
+@define-mixin typography-h4 $unit: rem {
+    @mixin font-montserrat 500;
+    font-size: 2.4$(unit);
+    line-height: 1.5;
+}
+
+@define-mixin typography-copy $unit: rem {
+    @mixin font-montserrat 500;
+    font-size: 1.6$(unit);
+    line-height: 1.5;
+}
+
+@define-mixin typography-small-copy $unit: rem {
+    @mixin font-montserrat 400;
+    font-size: 1.2$(unit);
+    line-height: 1.5;
+}
