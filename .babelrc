@@ -1,7 +1,8 @@
 {
     "presets": [
-        "next/babel",
-        "@babel/preset-env"
+        [
+            "next/babel"
+        ]
     ],
     "plugins": [
         "@babel/plugin-proposal-class-properties"
