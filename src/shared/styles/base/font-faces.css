@@ -2,26 +2,26 @@
     font-family: 'Montserrat';
     font-weight: 400;
     font-style: normal;
-    src: url('../media/fonts/montserrat-regular.woff2') format('woff2');
+    src: url('../../media/fonts/montserrat-regular.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Montserrat';
     font-weight: 500;
     font-style: normal;
-    src: url('../media/fonts/montserrat-medium.woff2') format('woff2');
+    src: url('../../media/fonts/montserrat-medium.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Montserrat';
     font-weight: 700;
     font-style: normal;
-    src: url('../media/fonts/montserrat-bold.woff2') format('woff2');
+    src: url('../../media/fonts/montserrat-bold.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'LeagueSpartan';
     font-weight: 700;
     font-style: normal;
-    src: url('../media/fonts/leaguespartan.woff') format('woff');
+    src: url('../../media/fonts/leaguespartan.woff') format('woff');
 }
