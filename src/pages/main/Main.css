@@ -1,0 +1,9 @@
+@import '../../shared/styles/colors.css';
+
+.root {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	flex: 1 0 auto;
+	background-color: var(--color-smoky-black);
+}

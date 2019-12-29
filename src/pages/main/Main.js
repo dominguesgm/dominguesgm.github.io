@@ -1,7 +1,14 @@
 import React from 'react';
+import { Canvas, Presentation } from '../../shared/components';
+
+import styles from './Main.css';
 
 const Main = () => (
-	<h1>Main Site Page</h1>
+	<div className={ styles.root }>
+		<Canvas/>
+		<Presentation />
+
+	</div>
 );
 
 export default Main;
