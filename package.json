@@ -20,12 +20,14 @@
   "homepage": "https://github.com/dominguesgm/dominguesgm.github.io#readme",
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
+    "file-loader": "^5.0.2",
     "next": "^9.1.1",
     "next-compose-plugins": "^2.2.0",
     "next-fonts": "^0.19.0",
     "normalize.css": "^8.0.1",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "three": "^0.112.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.5",

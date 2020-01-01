@@ -1,22 +1,23 @@
 @import '../../styles/colors.css';
 
 .wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	width: 100vw;
 	max-width: 192rem;
 	height: 100vh;
 	max-height: 108rem;
 	margin-right: 10rem;
 	margin-left: 10rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
 }
 
 .title {
-	line-height: 1.7;
 	color: var(--color-pastel-gray);
+	line-height: 1.7;
 }
 
 .name {
 	color: var(--color-white-smoke);
+	opacity: 0;
 }
