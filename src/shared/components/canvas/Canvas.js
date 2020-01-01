@@ -8,7 +8,14 @@ import { Scene,
 	PointLight,
 	Mesh,
 	Box3,
+	AmbientLight,
+	GridHelper,
+	BoxGeometry,
+	MeshBasicMaterial,
 } from 'three';
+import {
+	zDepthFinder,
+} from '../../utils';
 import fontAsset from '../../media/fonts/League Spartan_Regular.json';
 
 import styles from './Canvas.css';
@@ -19,30 +26,37 @@ const Canvas = () => {
 	useEffect(() => {
 		const fontLoader = new FontLoader();
 		const scene = new Scene();
-		const camera = new PerspectiveCamera(75, canvas.current.clientWidth / canvas.current.clientHeight, 0.1, 1000);
-
-		const renderer = new WebGLRenderer({ canvas: canvas.current });
-		renderer.setSize(canvas.current.clientWidth, canvas.current.clientHeight);
-		renderer.setClearColor('#000');
+		const fov = 45;
 
 		const font = fontLoader.parse(fontAsset);
+		const fontSize = 65;
+		const fontExtrusion = 10;
+		const titleLeftMargin = 100;
+
+		const camera = new PerspectiveCamera(fov, canvas.current.clientWidth / canvas.current.clientHeight, 0.1, 10000);
+
+		const renderer = new WebGLRenderer({ canvas: canvas.current, antialias: true });
+		renderer.setSize(canvas.current.clientWidth, canvas.current.clientHeight);
+		renderer.setClearColor('#08090A');
+
+
 		const name = new TextGeometry('Gil Domingues', {
 			font: font,
-			size: 20,
-			height: 2,
-			curveSegments: 12,
+			size: fontSize,
+			height: fontExtrusion,
+			curveSegments: 20,
 		});
-		const material = new MeshLambertMaterial( { color: 0xffffff } );
+		const material = new MeshLambertMaterial( { color: 0xf7f7f2 } );
 		const mesh = new Mesh( name, material );
-		const bounding = new Box3().setFromObject( mesh );
-		mesh.position.set(- bounding.getSize().x / 2, - bounding.getSize().y / 2, 0);
+		mesh.position.set(titleLeftMargin - canvas.current.clientWidth / 2, -fontSize/2, zDepthFinder(canvas.current.clientHeight, fov)-fontExtrusion);
 
 		const light = new PointLight(0xffffff, 1, 100, 0);
+		const ambLight = new AmbientLight(0xffffff, 0.2);
 		light.position.set(0, 0, 100);
 
 		scene.add(mesh);
 		scene.add(light);
-		camera.position.z = 100;
+		scene.add(ambLight);
 
 		renderer.render( scene, camera );
 		function animate() {

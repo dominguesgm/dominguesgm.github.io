@@ -9,7 +9,7 @@ const Presentation = () => {
 			<h1 className={styles.title}>
 				<span className={styles.greeting}>Hello</span>, I'm<br/>
 				<span className={styles.name}>Gil Domingues</span>
-				,<br/>Software Engineer
+				<br/>Software Engineer
 			</h1>
 		</div>
 	);
