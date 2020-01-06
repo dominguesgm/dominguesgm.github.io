@@ -13,6 +13,7 @@ import { Scene,
 	BoxGeometry,
 	MeshBasicMaterial,
 } from 'three';
+import Text from './helpers/Text';
 import {
 	zDepthFinder,
 } from '../../utils';
@@ -40,21 +41,36 @@ const Canvas = () => {
 		renderer.setClearColor('#08090A');
 
 
-		const name = new TextGeometry('Gil Domingues', {
+		// const name = new TextGeometry('Gil Domingues', {
+		// 	font: font,
+		// 	size: fontSize,
+		// 	height: fontExtrusion,
+		// 	curveSegments: 20,
+		// });
+		// const material = new MeshLambertMaterial( { color: 0xf7f7f2 } );
+		// const mesh = new Mesh( name, material );
+		// console.log('name', name);
+		// console.log('mesh', mesh);
+		// mesh.position.set(titleLeftMargin - canvas.current.clientWidth / 2, -fontSize/2, zDepthFinder(canvas.current.clientHeight, fov)-fontExtrusion);
+
+		const options = {
 			font: font,
-			size: fontSize,
-			height: fontExtrusion,
-			curveSegments: 20,
-		});
-		const material = new MeshLambertMaterial( { color: 0xf7f7f2 } );
-		const mesh = new Mesh( name, material );
-		mesh.position.set(titleLeftMargin - canvas.current.clientWidth / 2, -fontSize/2, zDepthFinder(canvas.current.clientHeight, fov)-fontExtrusion);
+			fontSize: fontSize,
+			fontExtrusion: 10,
+			titleLeftMargin: 100,
+		};
+
+		const text = new Text('Gil Domingues', null, options);
+		text.addToScene(scene);
+		text.applyToAll(function(mesh){mesh.position.set(titleLeftMargin - canvas.current.clientWidth / 2, -fontSize/2, zDepthFinder(canvas.current.clientHeight, fov)-fontExtrusion);});
+
+
 
 		const light = new PointLight(0xffffff, 1, 100, 0);
 		const ambLight = new AmbientLight(0xffffff, 0.2);
 		light.position.set(0, 0, 100);
 
-		scene.add(mesh);
+		// scene.add(mesh);
 		scene.add(light);
 		scene.add(ambLight);
 
