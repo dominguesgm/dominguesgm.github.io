@@ -40,19 +40,6 @@ const Canvas = () => {
 		renderer.setSize(canvas.current.clientWidth, canvas.current.clientHeight);
 		renderer.setClearColor('#08090A');
 
-
-		// const name = new TextGeometry('Gil Domingues', {
-		// 	font: font,
-		// 	size: fontSize,
-		// 	height: fontExtrusion,
-		// 	curveSegments: 20,
-		// });
-		// const material = new MeshLambertMaterial( { color: 0xf7f7f2 } );
-		// const mesh = new Mesh( name, material );
-		// console.log('name', name);
-		// console.log('mesh', mesh);
-		// mesh.position.set(titleLeftMargin - canvas.current.clientWidth / 2, -fontSize/2, zDepthFinder(canvas.current.clientHeight, fov)-fontExtrusion);
-
 		const options = {
 			font: font,
 			fontSize: fontSize,
@@ -60,12 +47,16 @@ const Canvas = () => {
 			titleLeftMargin: 100,
 		};
 
+		// Creating text mesh and adding to scene
 		const text = new Text('Gil Domingues', null, options);
 		text.addToScene(scene);
-		text.applyToAll(function(mesh){mesh.position.set(titleLeftMargin - canvas.current.clientWidth / 2, -fontSize/2, zDepthFinder(canvas.current.clientHeight, fov)-fontExtrusion);});
+		text.setPosition(
+			- text.width / 2, // titleLeftMargin - canvas.current.clientWidth / 2,
+			- fontSize / 2,
+			zDepthFinder(canvas.current.clientHeight, fov)-fontExtrusion
+		);
 
-
-
+		// Setting up rest of the scene
 		const light = new PointLight(0xffffff, 1, 100, 0);
 		const ambLight = new AmbientLight(0xffffff, 0.2);
 		light.position.set(0, 0, 100);

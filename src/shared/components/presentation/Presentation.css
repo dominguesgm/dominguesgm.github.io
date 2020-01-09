@@ -4,17 +4,43 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 100vw;
+	width: 100%;
 	max-width: 192rem;
 	height: 100vh;
 	max-height: 108rem;
-	margin-right: 10rem;
-	margin-left: 10rem;
+	padding-right: 10rem;
+	padding-left: 10rem;
 }
 
 .title {
+	display: flex;
+	flex-direction: column;
 	color: var(--color-pastel-gray);
 	line-height: 1.7;
+}
+
+.greeting {
+	align-self: center;
+	transform: translateY(-10rem);
+	opacity: 0;
+	transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+
+	&.entered {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+.job {
+	align-self: center;
+	opacity: 0;
+	transform: translateY(10rem);
+	transition: transform 1s ease-in-out 0.3s, opacity 1s ease-in-out 0.3s;
+
+	&.entered {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 
 .name {
