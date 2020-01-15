@@ -15,11 +15,11 @@ const Presentation = () => {
 
 	return (
 		<div className={styles.wrapper}>
-			<h1 className={styles.title}>
+			<h2 className={styles.title}>
 				<div className={classNames(styles.greeting, entered && styles.entered)}>Hello, I'm</div>
 				<div className={styles.name}>Gil Domingues</div>
 				<div className={classNames(styles.job, entered && styles.entered)}>Software Engineer</div>
-			</h1>
+			</h2>
 		</div>
 	);
 };
