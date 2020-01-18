@@ -16,7 +16,7 @@ import fontAsset from '../../media/fonts/League Spartan_Regular.json';
 
 import styles from './Canvas.css';
 
-const vectors = generateVectors(13);
+const gaussianPeak = 50;
 
 const Canvas = ({ mouseX, mouseY }) => {
 	const canvas = useRef(null);
@@ -25,25 +25,26 @@ const Canvas = ({ mouseX, mouseY }) => {
 	const scene = useRef();
 	const camera = useRef();
 	const text = useRef();
+	const vectors = useRef();
 
 	const animate = (time) => {
 		// interaction stuff
 		// TODO: setup better values
-		const peak = 50;
 		const stdDev = 150;
 
+		// TODO: do gaussian factor on Y axis to affect letter rotation
 		text.current.letterMeshes.forEach((letter, index) => {
 			const xAlongText = mouseX - (canvas.current.clientWidth/2) + (text.current.width/2);
 			const gaussianFactor = gaussianFunction(
 				letter.transX,
-				peak,
+				gaussianPeak,
 				xAlongText,
 				stdDev
 			);
 
-			letter.mesh.position.x = letter.posX + vectors[index].x * gaussianFactor;
-			letter.mesh.position.y = letter.posY + vectors[index].y * gaussianFactor;
-			letter.mesh.position.z = letter.posZ + vectors[index].z * gaussianFactor;
+			letter.mesh.position.x = letter.posX + vectors.current[index].x * gaussianFactor;
+			letter.mesh.position.y = letter.posY + vectors.current[index].y * gaussianFactor;
+			letter.mesh.position.z = letter.posZ + vectors.current[index].z * gaussianFactor;
 		});
 
 		renderer.current.render( scene.current, camera.current );
@@ -73,14 +74,17 @@ const Canvas = ({ mouseX, mouseY }) => {
 			titleLeftMargin: 100,
 		};
 
+		const zDepth = zDepthFinder(canvas.current.clientHeight, fov)-fontExtrusion;
+
 		// Creating text mesh and adding to scene
 		text.current = new Text('Gil Domingues', null, options);
 		text.current.addToScene(scene.current);
 		text.current.setPosition(
 			- text.current.width / 2,
 			- fontSize / 2,
-			zDepthFinder(canvas.current.clientHeight, fov)-fontExtrusion
+			zDepth
 		);
+		vectors.current = generateVectors(13, zDepth, gaussianPeak);
 
 		// Setting up rest of the scene
 		const light = new PointLight(0xffffff, 1, 100, 0);
