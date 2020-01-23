@@ -7,7 +7,7 @@
 	width: 100%;
 	max-width: 192rem;
 	height: 100vh;
-	max-height: 108rem;
+	margin: 0 auto;
 	padding-right: 10rem;
 	padding-left: 10rem;
 }
@@ -33,8 +33,8 @@
 
 .job {
 	align-self: center;
-	opacity: 0;
 	transform: translateY(10rem);
+	opacity: 0;
 	transition: transform 1s ease-in-out 0.3s, opacity 1s ease-in-out 0.3s;
 
 	&.entered {
