@@ -1,70 +1,109 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { Component, useRef, useEffect, useCallback } from 'react';
 import { Scene,
 	PerspectiveCamera,
 	WebGLRenderer,
-	TextGeometry,
 	FontLoader,
-	MeshLambertMaterial,
 	PointLight,
-	Mesh,
-	Box3,
 	AmbientLight,
-	GridHelper,
-	BoxGeometry,
-	MeshBasicMaterial,
 } from 'three';
+import Text from './helpers/Text';
 import {
 	zDepthFinder,
+	generateVectors,
+	gaussianFunction,
 } from '../../utils';
 import fontAsset from '../../media/fonts/League Spartan_Regular.json';
 
 import styles from './Canvas.css';
 
-const Canvas = () => {
-	const canvas = useRef(null);
+const gaussianPeak = 50;
 
+const Canvas = ({ mouseX, mouseY }) => {
+	const canvas = useRef(null);
+	const requestRef = useRef();
+	const renderer = useRef();
+	const scene = useRef();
+	const camera = useRef();
+	const text = useRef();
+	const vectors = useRef();
+
+	const animate = (time) => {
+		// interaction stuff
+		// TODO: setup better values
+		const stdDev = 150;
+
+		// TODO: do gaussian factor on Y axis to affect letter rotation
+		text.current.letterMeshes.forEach((letter, index) => {
+			const xAlongText = mouseX - (canvas.current.clientWidth/2) + (text.current.width/2);
+			const gaussianFactor = gaussianFunction(
+				letter.transX,
+				gaussianPeak,
+				xAlongText,
+				stdDev
+			);
+
+			letter.mesh.position.x = letter.posX + vectors.current[index].x * gaussianFactor;
+			letter.mesh.position.y = letter.posY + vectors.current[index].y * gaussianFactor;
+			letter.mesh.position.z = letter.posZ + vectors.current[index].z * gaussianFactor;
+		});
+
+		renderer.current.render( scene.current, camera.current );
+		requestRef.current = requestAnimationFrame(animate);
+	};
+
+	// Scene, camera and renderer setup
 	useEffect(() => {
 		const fontLoader = new FontLoader();
-		const scene = new Scene();
+		scene.current = new Scene();
 		const fov = 45;
 
 		const font = fontLoader.parse(fontAsset);
 		const fontSize = 65;
 		const fontExtrusion = 10;
-		const titleLeftMargin = 100;
 
-		const camera = new PerspectiveCamera(fov, canvas.current.clientWidth / canvas.current.clientHeight, 0.1, 10000);
+		camera.current = new PerspectiveCamera(fov, canvas.current.clientWidth / canvas.current.clientHeight, 0.1, 10000);
 
-		const renderer = new WebGLRenderer({ canvas: canvas.current, antialias: true });
-		renderer.setSize(canvas.current.clientWidth, canvas.current.clientHeight);
-		renderer.setClearColor('#08090A');
+		renderer.current = new WebGLRenderer({ canvas: canvas.current, antialias: true });
+		renderer.current.setSize(canvas.current.clientWidth, canvas.current.clientHeight);
+		renderer.current.setClearColor('#08090A');
 
-
-		const name = new TextGeometry('Gil Domingues', {
+		const options = {
 			font: font,
-			size: fontSize,
-			height: fontExtrusion,
-			curveSegments: 20,
-		});
-		const material = new MeshLambertMaterial( { color: 0xf7f7f2 } );
-		const mesh = new Mesh( name, material );
-		mesh.position.set(titleLeftMargin - canvas.current.clientWidth / 2, -fontSize/2, zDepthFinder(canvas.current.clientHeight, fov)-fontExtrusion);
+			fontSize: fontSize,
+			fontExtrusion: 10,
+			titleLeftMargin: 100,
+		};
 
+		const zDepth = zDepthFinder(canvas.current.clientHeight, fov)-fontExtrusion;
+
+		// Creating text mesh and adding to scene
+		text.current = new Text('Gil Domingues', null, options);
+		text.current.addToScene(scene.current);
+		text.current.setPosition(
+			- text.current.width / 2,
+			- fontSize / 2,
+			zDepth
+		);
+		vectors.current = generateVectors(13, zDepth, gaussianPeak);
+
+		// Setting up rest of the scene
 		const light = new PointLight(0xffffff, 1, 100, 0);
 		const ambLight = new AmbientLight(0xffffff, 0.2);
 		light.position.set(0, 0, 100);
 
-		scene.add(mesh);
-		scene.add(light);
-		scene.add(ambLight);
+		// scene.add(mesh);
+		scene.current.add(light);
+		scene.current.add(ambLight);
 
-		renderer.render( scene, camera );
-		function animate() {
-			requestAnimationFrame( animate );
-			renderer.render( scene, camera );
-		}
-		animate();
-	});
+		renderer.current.render( scene.current, camera.current );
+		requestRef.current = requestAnimationFrame( animate );
+	}, []);
+
+	// Update requestAnimationFrame with function with updated mouse values
+	useEffect(() => {
+		cancelAnimationFrame(requestRef.current);
+		requestRef.current = requestAnimationFrame(animate);
+	}, [mouseX, mouseY]);
 
 	return (
 		<canvas className={ styles.canvas } ref={ canvas } />
