@@ -26,6 +26,11 @@ const Canvas = ({ mouseX, mouseY }) => {
 	const camera = useRef();
 	const text = useRef();
 	const vectors = useRef();
+	const x = useRef();
+	const y = useRef();
+
+	x.current = mouseX;
+	y.current = mouseY;
 
 	const animate = (time) => {
 		// interaction stuff
@@ -34,7 +39,7 @@ const Canvas = ({ mouseX, mouseY }) => {
 
 		// TODO: do gaussian factor on Y axis to affect letter rotation
 		text.current.letterMeshes.forEach((letter, index) => {
-			const xAlongText = mouseX - (canvas.current.clientWidth/2) + (text.current.width/2);
+			const xAlongText = x.current - (canvas.current.clientWidth/2) + (text.current.width/2);
 			const gaussianFactor = gaussianFunction(
 				letter.transX,
 				gaussianPeak,
@@ -98,12 +103,6 @@ const Canvas = ({ mouseX, mouseY }) => {
 		renderer.current.render( scene.current, camera.current );
 		requestRef.current = requestAnimationFrame( animate );
 	}, []);
-
-	// Update requestAnimationFrame with function with updated mouse values
-	useEffect(() => {
-		cancelAnimationFrame(requestRef.current);
-		requestRef.current = requestAnimationFrame(animate);
-	}, [mouseX, mouseY]);
 
 	return (
 		<canvas className={ styles.canvas } ref={ canvas } />
