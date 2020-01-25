@@ -40,6 +40,7 @@ const Text = function (text, material, options) {
 	}
 
 	this.width = offsetX;
+	this.height = this.options.fontSize;
 
 	this.addToScene = function (scene) {
 		this.letterMeshes.forEach((letter) => scene.add(letter.mesh));

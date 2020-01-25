@@ -16,7 +16,7 @@ import fontAsset from '../../media/fonts/League Spartan_Regular.json';
 
 import styles from './Canvas.css';
 
-const gaussianPeak = 50;
+const GAUSSIAN_PEAK = 50;
 
 class Canvas extends Component {
 	requestAnimationFrameID = null;
@@ -27,8 +27,8 @@ class Canvas extends Component {
 	text = null;
 	vectors = null;
 	mouse = {
-		x: -1,
-		y: -1,
+		x: null,
+		y: null,
 	};
 
 	componentDidMount() {
@@ -65,7 +65,7 @@ class Canvas extends Component {
 			- fontSize / 2,
 			zDepth
 		);
-		this.vectors = generateVectors(13, zDepth, gaussianPeak);
+		this.vectors = generateVectors(13, zDepth, GAUSSIAN_PEAK);
 
 		// Setting up rest of the scene
 		const light = new PointLight(0xffffff, 1, 100, 0);
@@ -82,6 +82,8 @@ class Canvas extends Component {
 
 	componentWillUnmount() {
 		// remove event listener
+		window.removeEventListener('mousemove', this.handleMouseMove);
+		cancelAnimationFrame(this.requestAnimationFrameID);
 	}
 
 	render () {
@@ -91,10 +93,6 @@ class Canvas extends Component {
 	}
 
 	handleMouseMove = (event) => {
-		const velocity = Math.abs(this.mouse.x - event.clientX) + Math.abs(this.mouse.y - event.clientY);
-
-		console.log('velocity', velocity);
-
 		this.mouse.x = event.clientX;
 		this.mouse.y = event.clientY;
 	}
@@ -102,22 +100,35 @@ class Canvas extends Component {
 	animate = (time) => {
 		// interaction stuff
 		// TODO: setup better values
-		const stdDev = 150;
+		const stdDevX = 150;
+		const stdDevY = 150;
 
+		if(this.mouse.x !== null && this.mouse.y !== null) {
 		// TODO: do gaussian factor on Y axis to affect letter rotation
-		this.text.letterMeshes.forEach((letter, index) => {
-			const xAlongText = this.mouse.x - (window.innerWidth/2) + (this.text.width/2);
-			const gaussianFactor = gaussianFunction(
-				letter.transX,
-				gaussianPeak,
-				xAlongText,
-				stdDev
-			);
+			this.text.letterMeshes.forEach((letter, index) => {
+				const xAlongText = this.mouse.x - (window.innerWidth/2) + (this.text.width/2);
+				const yAlongText = this.mouse.y - (window.innerHeight/2) + (this.text.height/2);
 
-			letter.mesh.position.x = letter.posX + this.vectors[index].x * gaussianFactor;
-			letter.mesh.position.y = letter.posY + this.vectors[index].y * gaussianFactor;
-			letter.mesh.position.z = letter.posZ + this.vectors[index].z * gaussianFactor;
-		});
+				console.log('yAlongText', yAlongText);
+
+				const gaussianFactorX = gaussianFunction(
+					letter.transX,
+					xAlongText,
+					stdDevX
+				);
+				const gaussianFactorY = gaussianFunction(
+					yAlongText,
+					0,
+					stdDevY
+				);
+
+				const gaussianFactor = GAUSSIAN_PEAK * gaussianFactorX * gaussianFactorY;
+
+				letter.mesh.position.x = letter.posX + this.vectors[index].x * gaussianFactor;
+				letter.mesh.position.y = letter.posY + this.vectors[index].y * gaussianFactor;
+				letter.mesh.position.z = letter.posZ + this.vectors[index].z * gaussianFactor;
+			});
+		}
 
 		this.renderer.render( this.scene, this.camera );
 		this.requestAnimationFrameID = requestAnimationFrame( this.animate );

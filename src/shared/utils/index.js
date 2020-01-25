@@ -28,7 +28,8 @@ const generateVectors = (number, zDepth, peak) => {
 	return vectors;
 };
 
-const gaussianFunction = (x, peakHeight, peakBase, stdDev) => {
+const gaussianFunction = (x, peakBase, stdDev) => {
+	const peakHeight = 1; // this is so we can later apply the intensity we want
 	const expNumerator = Math.pow(x - peakBase, 2);
 	const expDenominator = 2 * stdDev * stdDev;
 	const exponent = - expNumerator / expDenominator;
