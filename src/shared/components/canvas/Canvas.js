@@ -18,59 +18,35 @@ import styles from './Canvas.css';
 
 const gaussianPeak = 50;
 
-const Canvas = ({ mouseX, mouseY }) => {
-	const canvas = useRef(null);
-	const requestRef = useRef();
-	const renderer = useRef();
-	const scene = useRef();
-	const camera = useRef();
-	const text = useRef();
-	const vectors = useRef();
-	const x = useRef();
-	const y = useRef();
-
-	x.current = mouseX;
-	y.current = mouseY;
-
-	const animate = (time) => {
-		// interaction stuff
-		// TODO: setup better values
-		const stdDev = 150;
-
-		// TODO: do gaussian factor on Y axis to affect letter rotation
-		text.current.letterMeshes.forEach((letter, index) => {
-			const xAlongText = x.current - (canvas.current.clientWidth/2) + (text.current.width/2);
-			const gaussianFactor = gaussianFunction(
-				letter.transX,
-				gaussianPeak,
-				xAlongText,
-				stdDev
-			);
-
-			letter.mesh.position.x = letter.posX + vectors.current[index].x * gaussianFactor;
-			letter.mesh.position.y = letter.posY + vectors.current[index].y * gaussianFactor;
-			letter.mesh.position.z = letter.posZ + vectors.current[index].z * gaussianFactor;
-		});
-
-		renderer.current.render( scene.current, camera.current );
-		requestRef.current = requestAnimationFrame(animate);
+class Canvas extends Component {
+	requestAnimationFrameID = null;
+	canvas = React.createRef();
+	renderer = null;
+	scene = null;
+	camera = null;
+	text = null;
+	vectors = null;
+	mouse = {
+		x: -1,
+		y: -1,
 	};
 
-	// Scene, camera and renderer setup
-	useEffect(() => {
+	componentDidMount() {
+		window.addEventListener('mousemove', this.handleMouseMove);
+
 		const fontLoader = new FontLoader();
-		scene.current = new Scene();
+		this.scene = new Scene();
 		const fov = 45;
 
 		const font = fontLoader.parse(fontAsset);
 		const fontSize = 65;
 		const fontExtrusion = 10;
 
-		camera.current = new PerspectiveCamera(fov, canvas.current.clientWidth / canvas.current.clientHeight, 0.1, 10000);
+		this.camera = new PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 0.1, 10000);
 
-		renderer.current = new WebGLRenderer({ canvas: canvas.current, antialias: true });
-		renderer.current.setSize(canvas.current.clientWidth, canvas.current.clientHeight);
-		renderer.current.setClearColor('#08090A');
+		this.renderer = new WebGLRenderer({ canvas: this.canvas.current, antialias: true });
+		this.renderer.setSize(window.innerWidth, window.innerHeight);
+		this.renderer.setClearColor('#08090A');
 
 		const options = {
 			font: font,
@@ -79,17 +55,17 @@ const Canvas = ({ mouseX, mouseY }) => {
 			titleLeftMargin: 100,
 		};
 
-		const zDepth = zDepthFinder(canvas.current.clientHeight, fov)-fontExtrusion;
+		const zDepth = zDepthFinder(window.innerHeight, fov)-fontExtrusion;
 
 		// Creating text mesh and adding to scene
-		text.current = new Text('Gil Domingues', null, options);
-		text.current.addToScene(scene.current);
-		text.current.setPosition(
-			- text.current.width / 2,
+		this.text = new Text('Gil Domingues', null, options);
+		this.text.addToScene(this.scene);
+		this.text.setPosition(
+			- this.text.width / 2,
 			- fontSize / 2,
 			zDepth
 		);
-		vectors.current = generateVectors(13, zDepth, gaussianPeak);
+		this.vectors = generateVectors(13, zDepth, gaussianPeak);
 
 		// Setting up rest of the scene
 		const light = new PointLight(0xffffff, 1, 100, 0);
@@ -97,16 +73,56 @@ const Canvas = ({ mouseX, mouseY }) => {
 		light.position.set(0, 0, 100);
 
 		// scene.add(mesh);
-		scene.current.add(light);
-		scene.current.add(ambLight);
+		this.scene.add(light);
+		this.scene.add(ambLight);
 
-		renderer.current.render( scene.current, camera.current );
-		requestRef.current = requestAnimationFrame( animate );
-	}, []);
+		this.renderer.render( this.scene, this.camera );
+		this.requestAnimationFrameID = requestAnimationFrame( this.animate );
+	}
 
-	return (
-		<canvas className={ styles.canvas } ref={ canvas } />
-	);
-};
+	componentWillUnmount() {
+		// remove event listener
+	}
+
+	render () {
+		return (
+			<canvas className={ styles.canvas } ref={ this.canvas } />
+		);
+	}
+
+	handleMouseMove = (event) => {
+		const velocity = Math.abs(this.mouse.x - event.clientX) + Math.abs(this.mouse.y - event.clientY);
+
+		console.log('velocity', velocity);
+
+		this.mouse.x = event.clientX;
+		this.mouse.y = event.clientY;
+	}
+
+	animate = (time) => {
+		// interaction stuff
+		// TODO: setup better values
+		const stdDev = 150;
+
+		// TODO: do gaussian factor on Y axis to affect letter rotation
+		this.text.letterMeshes.forEach((letter, index) => {
+			const xAlongText = this.mouse.x - (window.innerWidth/2) + (this.text.width/2);
+			const gaussianFactor = gaussianFunction(
+				letter.transX,
+				gaussianPeak,
+				xAlongText,
+				stdDev
+			);
+
+			letter.mesh.position.x = letter.posX + this.vectors[index].x * gaussianFactor;
+			letter.mesh.position.y = letter.posY + this.vectors[index].y * gaussianFactor;
+			letter.mesh.position.z = letter.posZ + this.vectors[index].z * gaussianFactor;
+		});
+
+		this.renderer.render( this.scene, this.camera );
+		this.requestAnimationFrameID = requestAnimationFrame( this.animate );
+	}
+
+}
 
 export default Canvas;
