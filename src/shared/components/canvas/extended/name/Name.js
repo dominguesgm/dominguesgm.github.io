@@ -122,7 +122,9 @@ class NameCanvas extends Canvas {
 	}
 
 	animateCamera(time) {
-		const finalTime = 2000;
+		const startTime = 0;
+		const duration = 2000;
+		const finalTime = startTime + duration;
 
 		if(time >= finalTime) {
 			return {
@@ -130,13 +132,17 @@ class NameCanvas extends Canvas {
 				value: 0,
 			};
 		}
-		const progress = (time / finalTime);
+		const progress = Math.max(((time - startTime) / duration), 0);
 
 		// Rotate along x axis
-		const initialRotation = Math.PI/2;
+		const initialRotation = -Math.PI/2;
 
 		// Ease out quad formula
-		const easingProgress =  progress * (2 - progress);
+		// const easingProgress =  progress * (2 - progress);
+		// Ease in out quad formula
+		const easingProgress = progress < .5 ?
+			2 * progress * progress :
+			-1 + (4 - 2 * progress) * progress;
 
 		const rotation = initialRotation - easingProgress * initialRotation;
 

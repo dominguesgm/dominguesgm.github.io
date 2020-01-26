@@ -1,4 +1,4 @@
-@import '../../styles/colors.css';
+@import '../../styles/variables.css';
 
 .wrapper {
 	display: flex;
@@ -8,8 +8,8 @@
 	max-width: 192rem;
 	height: 100vh;
 	margin: 0 auto;
-	padding-right: 10rem;
-	padding-left: 10rem;
+	padding-right: var(--layout-horizontal-padding);
+	padding-left: var(--layout-horizontal-padding);
 }
 
 .title {
@@ -21,9 +21,9 @@
 
 .greeting {
 	align-self: center;
-	transform: translateY(-10rem);
+	transform: translateX(-10rem);
 	opacity: 0;
-	transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+	transition: transform 1s ease-in-out 1s, opacity 1s ease-in-out 1s;
 
 	&.entered {
 		transform: translateY(0);
@@ -33,9 +33,9 @@
 
 .job {
 	align-self: center;
-	transform: translateY(10rem);
+	transform: translateX(10rem);
 	opacity: 0;
-	transition: transform 1s ease-in-out 0.3s, opacity 1s ease-in-out 0.3s;
+	transition: transform 1s ease-in-out 1.3s, opacity 1s ease-in-out 1.3s;
 
 	&.entered {
 		transform: translateY(0);

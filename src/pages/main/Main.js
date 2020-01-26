@@ -1,5 +1,5 @@
 import React from 'react';
-import { NameCanvas, Presentation } from '../../shared/components';
+import { Header, NameCanvas, Presentation } from '../../shared/components';
 
 import styles from './Main.css';
 
@@ -7,6 +7,7 @@ const Main = () => {
 
 	return (
 		<div className={ styles.root }>
+			<Header />
 			<NameCanvas />
 			<Presentation />
 		</div>

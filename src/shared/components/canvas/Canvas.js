@@ -17,6 +17,7 @@ class Canvas extends Component {
 
 	componentDidMount() {
 		window.addEventListener('mousemove', this.handleMouseMove);
+		window.addEventListener('resize', this.handleResize);
 
 		this.setupScene();
 
@@ -33,6 +34,13 @@ class Canvas extends Component {
 		return (
 			<canvas className={ styles.canvas } ref={ this.canvas } />
 		);
+	}
+
+	handleResize = () => {
+		this.camera.aspect = window.innerWidth / window.innerHeight;
+		this.camera.updateProjectionMatrix();
+
+		this.renderer.setSize( window.innerWidth, window.innerHeight );
 	}
 
 	handleMouseMove = (event) => {
