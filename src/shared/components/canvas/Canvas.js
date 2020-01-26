@@ -14,10 +14,16 @@ class Canvas extends Component {
 		oldY: null,
 	};
 	prevTime = 0;
+	pageHasLoaded = false;
+
 
 	componentDidMount() {
 		window.addEventListener('mousemove', this.handleMouseMove);
 		window.addEventListener('resize', this.handleResize);
+
+		window.addEventListener('load', () => {
+			this.pageHasLoaded = true;
+		});
 
 		this.setupScene();
 
@@ -51,7 +57,16 @@ class Canvas extends Component {
 	}
 
 	animate = (time) => {
-		this.animateScene(time);
+		if(!this.pageHasLoaded) {
+			this.requestAnimationFrameID = requestAnimationFrame( this.animate );
+			return false;
+		}
+
+		if(this.trueStart == undefined) {
+			this.trueStart = time;
+		}
+
+		this.animateScene(time - this.trueStart);
 
 		this.prevTime = time;
 		this.requestAnimationFrameID = requestAnimationFrame( this.animate );

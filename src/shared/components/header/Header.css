@@ -19,10 +19,21 @@
 	margin-left: 2rem;
 	color: inherit;
 	text-decoration: none;
-	opacity: 0.6;
-	transition: opacity 0.3s ease-in-out;
+	opacity: 0;
+	transform: translateY(2rem);
+	transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 
-	&:hover {
-		opacity: 0.9;
+	&.entered {
+		opacity: 1;
+		transform: translateY(0);
+
+		& svg {
+			opacity: 0.6;
+			transition: opacity 0.3s ease-in-out;
+
+			&:hover {
+				opacity: 0.9;
+			}
+		}
 	}
 }

@@ -23,7 +23,7 @@
 	align-self: center;
 	transform: translateX(-10rem);
 	opacity: 0;
-	transition: transform 1s ease-in-out 1s, opacity 1s ease-in-out 1s;
+	transition: transform 1s ease-in-out 2s, opacity 1s ease-in-out 2s;
 
 	&.entered {
 		transform: translateY(0);
@@ -35,7 +35,7 @@
 	align-self: center;
 	transform: translateX(10rem);
 	opacity: 0;
-	transition: transform 1s ease-in-out 1.3s, opacity 1s ease-in-out 1.3s;
+	transition: transform 1s ease-in-out 2.3s, opacity 1s ease-in-out 2.3s;
 
 	&.entered {
 		transform: translateY(0);
