@@ -31,6 +31,11 @@ class Canvas extends Component {
 		y: null,
 	};
 
+	// Font stuff
+	fontSize = 65;
+	fontExtrusion = 10;
+	zDepth = 0;
+
 	componentDidMount() {
 		window.addEventListener('mousemove', this.handleMouseMove);
 
@@ -39,8 +44,6 @@ class Canvas extends Component {
 		const fov = 45;
 
 		const font = fontLoader.parse(fontAsset);
-		const fontSize = 65;
-		const fontExtrusion = 10;
 
 		this.camera = new PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 0.1, 10000);
 
@@ -50,22 +53,17 @@ class Canvas extends Component {
 
 		const options = {
 			font: font,
-			fontSize: fontSize,
+			fontSize: this.fontSize,
 			fontExtrusion: 10,
 			titleLeftMargin: 100,
 		};
 
-		const zDepth = zDepthFinder(window.innerHeight, fov)-fontExtrusion;
+		this.zDepth = zDepthFinder(window.innerHeight, fov) - this.fontExtrusion;
 
 		// Creating text mesh and adding to scene
 		this.text = new Text('Gil Domingues', null, options);
 		this.text.addToScene(this.scene);
-		this.text.setPosition(
-			- this.text.width / 2,
-			- fontSize / 2,
-			zDepth
-		);
-		this.vectors = generateVectors(13, zDepth, GAUSSIAN_PEAK);
+		this.vectors = generateVectors(13, this.zDepth, GAUSSIAN_PEAK);
 
 		// Setting up rest of the scene
 		const light = new PointLight(0xffffff, 1, 100, 0);
@@ -103,13 +101,23 @@ class Canvas extends Component {
 		const stdDevX = 150;
 		const stdDevY = 150;
 
+		this.camera.rotation.x = this.animateCamera(time);
+
+		this.text.setPosition(
+			- this.text.width / 2,
+			- this.fontSize / 2,
+			this.zDepth
+		);
+
+		this.text.letterMeshes.forEach((letter) => {
+			letter.mesh.position.x += letter.transX;
+		});
+
 		if(this.mouse.x !== null && this.mouse.y !== null) {
 		// TODO: do gaussian factor on Y axis to affect letter rotation
 			this.text.letterMeshes.forEach((letter, index) => {
 				const xAlongText = this.mouse.x - (window.innerWidth/2) + (this.text.width/2);
 				const yAlongText = this.mouse.y - (window.innerHeight/2) + (this.text.height/2);
-
-				console.log('yAlongText', yAlongText);
 
 				const gaussianFactorX = gaussianFunction(
 					letter.transX,
@@ -124,14 +132,37 @@ class Canvas extends Component {
 
 				const gaussianFactor = GAUSSIAN_PEAK * gaussianFactorX * gaussianFactorY;
 
-				letter.mesh.position.x = letter.posX + this.vectors[index].x * gaussianFactor;
-				letter.mesh.position.y = letter.posY + this.vectors[index].y * gaussianFactor;
-				letter.mesh.position.z = letter.posZ + this.vectors[index].z * gaussianFactor;
+				letter.mesh.position.x = letter.transX + letter.posX + this.vectors[index].x * gaussianFactor;
+				letter.mesh.position.y = letter.transY + letter.posY + this.vectors[index].y * gaussianFactor;
+				letter.mesh.position.z = letter.transY + letter.posZ + this.vectors[index].z * gaussianFactor;
+
+				// Rotation
+				// letter.mesh.rotation.y = this.vectors[index].rotY * gaussianFactor;
+				// letter.mesh.rotation.z = this.vectors[index].rotZ * gaussianFactor;
 			});
 		}
 
 		this.renderer.render( this.scene, this.camera );
 		this.requestAnimationFrameID = requestAnimationFrame( this.animate );
+	}
+
+	animateCamera(time) {
+		const finalTime = 2000;
+
+		if(time >= finalTime) {
+			return 0;
+		}
+		const progress = (time / finalTime);
+
+		// Rotate along x axis
+		const initialRotation = Math.PI/2;
+
+		// Ease out quad formula
+		const easingProgress =  progress * (2 - progress);
+
+		const rotation = initialRotation - easingProgress * initialRotation;
+
+		return rotation;
 	}
 
 }

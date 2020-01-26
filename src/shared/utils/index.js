@@ -20,6 +20,8 @@ const generateVectors = (number, zDepth, peak) => {
 			x: tempX / magnitude,
 			y: tempY / magnitude,
 			z: tempZ,
+			rotY: (Math.random() * 2 - 1) * Math.PI / 2,
+			rotZ: (Math.random() * 2 - 1) * Math.PI / 2,
 		};
 
 		vectors.push(vector);

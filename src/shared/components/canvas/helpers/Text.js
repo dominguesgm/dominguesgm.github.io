@@ -21,7 +21,13 @@ const Text = function (text, material, options) {
 			curveSegments: this.options.curveSegments,
 		});
 
-		name.translate(offsetX, 0, 0);
+		// name.translate(offsetX, 0, 0);
+		const letterWidth = this.options.font.data.glyphs[text[i]].ha * scale;
+		// const letterHeight = this.options.fontSize;
+		// const letterDepth = this.options.fontExtrusion;
+
+		// Try to center letters before building text
+		// name.translate(-letterWidth/2, -letterHeight/2, -letterDepth/2);
 
 		const mesh = new Mesh(name, this.material);
 
@@ -36,7 +42,7 @@ const Text = function (text, material, options) {
 		});
 
 		// To understand why we do this, please see create path function of Threejs's Font implementation (glyph width * font scale)
-		offsetX += this.options.font.data.glyphs[text[i]].ha * scale;
+		offsetX += letterWidth;
 	}
 
 	this.width = offsetX;
