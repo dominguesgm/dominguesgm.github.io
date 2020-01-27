@@ -47,6 +47,8 @@ class Canvas extends Component {
 		this.camera.updateProjectionMatrix();
 
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
+
+		this.onResize && this.onResize();
 	}
 
 	handleMouseMove = (event) => {
@@ -54,6 +56,8 @@ class Canvas extends Component {
 		this.mouse.oldY = this.mouse.y;
 		this.mouse.x = event.clientX;
 		this.mouse.y = event.clientY;
+
+		this.onMouseMove && this.onMouseMove();
 	}
 
 	animate = (time) => {

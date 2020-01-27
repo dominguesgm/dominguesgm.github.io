@@ -12,7 +12,7 @@ const generateVectors = (number, zDepth, peak) => {
 
 	for(let i = 0; i < number; i++) {
 		const tempX = 0;
-		const tempY = i % 2 === 0 ? 1 : -1;
+		const tempY = 0;
 		const tempZ = -zDepth / (peak * 3);
 		const magnitude = Math.sqrt(tempX*tempX + tempY*tempY) || 1;
 

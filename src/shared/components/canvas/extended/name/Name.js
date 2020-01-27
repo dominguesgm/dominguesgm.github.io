@@ -20,6 +20,11 @@ const GAUSSIAN_PEAK = 50;
 class NameCanvas extends Canvas {
 	text = null;
 	vectors = null;
+	cameraOptions = {
+		fov: 45,
+		near: 0.1,
+		far: 10000,
+	};
 
 	// Font stuff
 	fontSize = 65;
@@ -29,11 +34,10 @@ class NameCanvas extends Canvas {
 	setupScene() {
 		const fontLoader = new FontLoader();
 		this.scene = new Scene();
-		const fov = 45;
 
 		const font = fontLoader.parse(fontAsset);
 
-		this.camera = new PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 0.1, 10000);
+		this.camera = new PerspectiveCamera(this.cameraOptions.fov, window.innerWidth / window.innerHeight, this.cameraOptions.near, this.cameraOptions.far);
 
 		this.renderer = new WebGLRenderer({ canvas: this.canvas.current, antialias: true });
 		this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -46,7 +50,7 @@ class NameCanvas extends Canvas {
 			titleLeftMargin: 100,
 		};
 
-		this.zDepth = zDepthFinder(window.innerHeight, fov) - this.fontExtrusion;
+		this.zDepth = zDepthFinder(window.innerHeight, this.cameraOptions.fov) - this.fontExtrusion;
 
 		// Creating text mesh and adding to scene
 		this.text = new Text('Gil Domingues', null, options);
@@ -63,6 +67,10 @@ class NameCanvas extends Canvas {
 		this.scene.add(ambLight);
 
 		this.renderer.render( this.scene, this.camera );
+	}
+
+	onResize() {
+		this.zDepth = zDepthFinder(window.innerHeight, this.cameraOptions.fov) - this.fontExtrusion;
 	}
 
 	animateScene(time) {

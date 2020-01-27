@@ -8,8 +8,6 @@ import styles from './Header.css';
 
 import cv from '../../media/files/CV.pdf';
 
-console.log('cv', cv);
-
 const socialData = [
 	{
 		url: 'https://github.com/dominguesgm',
