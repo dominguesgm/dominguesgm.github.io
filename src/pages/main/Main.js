@@ -8,7 +8,7 @@ const Main = () => {
 	return (
 		<div className={ styles.root }>
 			<Header />
-			<NameCanvas />
+			<NameCanvas isTouchable={ false } />
 			<Presentation />
 		</div>
 	);

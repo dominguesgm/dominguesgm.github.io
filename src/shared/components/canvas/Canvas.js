@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'class-names';
 import styles from './Canvas.css';
 
 class Canvas extends Component {
@@ -38,7 +40,7 @@ class Canvas extends Component {
 
 	render () {
 		return (
-			<canvas className={ styles.canvas } ref={ this.canvas } />
+			<canvas className={ classNames(styles.canvas, !this.props.isTouchable && styles.notTouchable) } ref={ this.canvas } />
 		);
 	}
 
@@ -77,5 +79,13 @@ class Canvas extends Component {
 	}
 
 }
+
+Canvas.propTypes = {
+	isTouchable: PropTypes.bool,
+};
+
+Canvas.defaultProps = {
+	isTouchable: true,
+};
 
 export default Canvas;

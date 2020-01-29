@@ -39,9 +39,9 @@ class NameCanvas extends Canvas {
 
 		this.camera = new PerspectiveCamera(this.cameraOptions.fov, window.innerWidth / window.innerHeight, this.cameraOptions.near, this.cameraOptions.far);
 
-		this.renderer = new WebGLRenderer({ canvas: this.canvas.current, antialias: true });
+		this.renderer = new WebGLRenderer({ canvas: this.canvas.current, antialias: true, alpha: true });
 		this.renderer.setSize(window.innerWidth, window.innerHeight);
-		this.renderer.setClearColor('#08090A');
+		this.renderer.setClearColor('#08090A', 0);
 
 		const options = {
 			font: font,

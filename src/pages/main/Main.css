@@ -5,4 +5,5 @@
 	display: flex;
 	flex: 1 0 auto;
 	flex-direction: column;
+	background-color: var(--color-smoky-black);
 }
