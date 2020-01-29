@@ -66,6 +66,14 @@ class NameCanvas extends Canvas {
 		this.scene.add(light);
 		this.scene.add(ambLight);
 
+		this.text.letterMeshes.forEach((letter) => {
+			letter.posX = letter.transX - this.text.width / 2;
+			letter.posZ = this.zDepth;
+
+			letter.mesh.position.x = letter.posX;
+			letter.mesh.position.z = letter.posZ;
+		});
+
 		this.renderer.render( this.scene, this.camera );
 	}
 
@@ -77,21 +85,11 @@ class NameCanvas extends Canvas {
 		// interaction stuff
 		// TODO: setup better values
 		const stdDevX = 150;
-		const stdDevY = 100;
+		const stdDevY = 150;
 
 		const cameraAnimation = this.animateCamera(time);
 
 		this.camera.rotation.x = cameraAnimation.value;
-
-		this.text.setPosition(
-			- this.text.width / 2,
-			- this.fontSize / 2,
-			this.zDepth
-		);
-
-		this.text.letterMeshes.forEach((letter) => {
-			letter.mesh.position.x += letter.transX;
-		});
 
 		const shouldAnimateText = cameraAnimation.isDone &&
 			((this.mouse.x !== this.mouse.oldX &&
@@ -114,15 +112,17 @@ class NameCanvas extends Canvas {
 					stdDevY
 				);
 
-				const gaussianFactor = GAUSSIAN_PEAK * gaussianFactorX * gaussianFactorY;
+				const rotationGaussianFactor = gaussianFactorX * gaussianFactorY;
+				const translationGaussianFactor = GAUSSIAN_PEAK * rotationGaussianFactor;
 
-				letter.mesh.position.x = letter.transX + letter.posX + this.vectors[index].x * gaussianFactor;
-				letter.mesh.position.y = letter.transY + letter.posY + this.vectors[index].y * gaussianFactor;
-				letter.mesh.position.z = letter.transY + letter.posZ + this.vectors[index].z * gaussianFactor;
+				letter.mesh.position.x += (letter.posX + this.vectors[index].x * translationGaussianFactor - letter.mesh.position.x) * 0.1;
+				letter.mesh.position.y += (letter.posY + this.vectors[index].y * translationGaussianFactor - letter.mesh.position.y) * 0.1;
+				letter.mesh.position.z += (letter.posZ + this.vectors[index].z * translationGaussianFactor - letter.mesh.position.z) * 0.1;
 
 				// Rotation
-				// letter.mesh.rotation.y = this.vectors[index].rotY * gaussianFactor;
-				// letter.mesh.rotation.z = this.vectors[index].rotZ * gaussianFactor;
+				letter.mesh.rotation.x += (this.vectors[index].rotX * rotationGaussianFactor - letter.mesh.rotation.x) * 0.1;
+				letter.mesh.rotation.y += (this.vectors[index].rotY * rotationGaussianFactor - letter.mesh.rotation.y) * 0.1;
+				letter.mesh.rotation.z += (this.vectors[index].rotZ * rotationGaussianFactor - letter.mesh.rotation.z) * 0.1;
 			});
 		}
 

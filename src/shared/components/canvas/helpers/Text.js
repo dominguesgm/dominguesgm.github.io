@@ -21,19 +21,18 @@ const Text = function (text, material, options) {
 			curveSegments: this.options.curveSegments,
 		});
 
-		// name.translate(offsetX, 0, 0);
 		const letterWidth = this.options.font.data.glyphs[text[i]].ha * scale;
-		// const letterHeight = this.options.fontSize;
-		// const letterDepth = this.options.fontExtrusion;
+		const letterHeight = this.options.fontSize;
+		const letterDepth = this.options.fontExtrusion;
 
 		// Try to center letters before building text
-		// name.translate(-letterWidth/2, -letterHeight/2, -letterDepth/2);
+		name.translate(-letterWidth/2, -letterHeight/2, -letterDepth/2);
 
 		const mesh = new Mesh(name, this.material);
 
 		this.letterMeshes.push({
 			mesh,
-			transX: offsetX,
+			transX: offsetX + letterWidth/2,
 			transY: 0,
 			transZ: 0,
 			posX: 0,

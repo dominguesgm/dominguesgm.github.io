@@ -8,20 +8,21 @@ const zDepthFinder = (canvasHeight, fov ) => {
 };
 
 const generateVectors = (number, zDepth, peak) => {
-	let vectors = [];
+	const vectors = [];
 
 	for(let i = 0; i < number; i++) {
-		const tempX = 0;
-		const tempY = 0;
-		const tempZ = -zDepth / (peak * 3);
+		const tempX = (Math.random() - 0.5) * 0.1;
+		const tempY = Math.random() * (i % 2 === 0 ? 1 : -1);
+		const tempZ = -zDepth / (peak * 1.5);
 		const magnitude = Math.sqrt(tempX*tempX + tempY*tempY) || 1;
 
 		const vector = {
 			x: tempX / magnitude,
 			y: tempY / magnitude,
 			z: tempZ,
-			rotY: (Math.random() * 2 - 1) * Math.PI / 2,
-			rotZ: (Math.random() * 2 - 1) * Math.PI / 2,
+			rotX: (Math.random() * 2 - 1) * Math.PI,
+			rotY: (Math.random() * 2 - 1) * Math.PI,
+			rotZ: (Math.random() * 2 - 1) * Math.PI,
 		};
 
 		vectors.push(vector);
