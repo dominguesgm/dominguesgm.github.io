@@ -27,7 +27,7 @@ class Canvas extends Component {
 			this.pageHasLoaded = true;
 		});
 
-		this.setupScene();
+		this.setupTHREE();
 
 		this.requestAnimationFrameID = requestAnimationFrame( this.animate );
 	}

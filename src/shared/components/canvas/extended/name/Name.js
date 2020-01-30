@@ -6,7 +6,7 @@ import { Scene,
 	AmbientLight,
 } from 'three';
 import Canvas from '../../';
-import Text from '../../helpers/Text';
+import Text from './helpers/Text';
 import {
 	zDepthFinder,
 	generateVectors,
@@ -31,32 +31,37 @@ class NameCanvas extends Canvas {
 	fontExtrusion = 10;
 	zDepth = 0;
 
-	setupScene() {
-		const fontLoader = new FontLoader();
+	setupTHREE() {
 		this.scene = new Scene();
-
-		const font = fontLoader.parse(fontAsset);
-
-		this.camera = new PerspectiveCamera(this.cameraOptions.fov, window.innerWidth / window.innerHeight, this.cameraOptions.near, this.cameraOptions.far);
-
-		this.renderer = new WebGLRenderer({ canvas: this.canvas.current, antialias: true, alpha: true });
-		this.renderer.setSize(window.innerWidth, window.innerHeight);
-		this.renderer.setClearColor('#08090A', 0);
-
-		const options = {
-			font: font,
-			fontSize: this.fontSize,
-			fontExtrusion: 10,
-			titleLeftMargin: 100,
-		};
 
 		this.zDepth = zDepthFinder(window.innerHeight, this.cameraOptions.fov) - this.fontExtrusion;
 
-		// Creating text mesh and adding to scene
-		this.text = new Text('Gil Domingues', null, options);
-		this.text.addToScene(this.scene);
-		this.vectors = generateVectors(13, this.zDepth, GAUSSIAN_PEAK);
+		this.setupRenderer();
 
+		this.setupCamera();
+
+		this.setupLights();
+
+		this.setupObjects();
+
+	}
+
+	setupRenderer() {
+		this.renderer = new WebGLRenderer({ canvas: this.canvas.current, antialias: true, alpha: true });
+		this.renderer.setSize(window.innerWidth, window.innerHeight);
+		this.renderer.setClearColor('#08090A', 0);
+	}
+
+	setupCamera() {
+		this.camera = new PerspectiveCamera(
+			this.cameraOptions.fov,
+			window.innerWidth / window.innerHeight,
+			this.cameraOptions.near,
+			this.cameraOptions.far
+		);
+	}
+
+	setupLights() {
 		// Setting up rest of the scene
 		const light = new PointLight(0xffffff, 1, 100, 0);
 		const ambLight = new AmbientLight(0xffffff, 0.2);
@@ -65,6 +70,23 @@ class NameCanvas extends Canvas {
 		// scene.add(mesh);
 		this.scene.add(light);
 		this.scene.add(ambLight);
+	}
+
+	setupObjects() {
+		const fontLoader = new FontLoader();
+		const font = fontLoader.parse(fontAsset);
+
+		const options = {
+			font: font,
+			fontSize: this.fontSize,
+			fontExtrusion: 10,
+			titleLeftMargin: 100,
+		};
+
+		// Creating text mesh and adding to scene
+		this.text = new Text('Gil Domingues', null, options);
+		this.text.addToScene(this.scene);
+		this.vectors = generateVectors(13, this.zDepth, GAUSSIAN_PEAK);
 
 		this.text.letterMeshes.forEach((letter) => {
 			letter.posX = letter.transX - this.text.width / 2;
@@ -73,25 +95,56 @@ class NameCanvas extends Canvas {
 			letter.mesh.position.x = letter.posX;
 			letter.mesh.position.z = letter.posZ;
 		});
+	}
+
+	animateScene(time) {
+		const cameraAnimation = this.updateCameraPosition(time);
+
+		this.updateTextPosition(time, cameraAnimation.isDone);
 
 		this.renderer.render( this.scene, this.camera );
 	}
 
-	onResize() {
-		this.zDepth = zDepthFinder(window.innerHeight, this.cameraOptions.fov) - this.fontExtrusion;
+	updateCameraPosition(time) {
+		const startTime = 0;
+		const duration = 2000;
+		const finalTime = startTime + duration;
+		const finalPosition = 0;
+
+
+		if(time >= finalTime) {
+			this.camera.rotation.x = finalPosition;
+			return {
+				isDone: true,
+			};
+		}
+		const progress = Math.max(((time - startTime) / duration), 0);
+
+		// Rotate along x axis
+		const initialRotation = -Math.PI/2;
+
+		// Ease out quad formula
+		// const easingProgress =  progress * (2 - progress);
+		// Ease in out quad formula
+		const easingProgress = progress < .5 ?
+			2 * progress * progress :
+			-1 + (4 - 2 * progress) * progress;
+
+		const rotation = initialRotation - easingProgress * initialRotation;
+		this.camera.rotation.x = rotation;
+
+		return {
+			isDone: false,
+		};
 	}
 
-	animateScene(time) {
+	updateTextPosition(time, enableInteraction) {
 		// interaction stuff
 		// TODO: setup better values
 		const stdDevX = 150;
 		const stdDevY = 150;
 
-		const cameraAnimation = this.animateCamera(time);
-
-		this.camera.rotation.x = cameraAnimation.value;
-
-		const shouldAnimateText = cameraAnimation.isDone &&
+		const shouldAnimateText = enableInteraction &&
 			((this.mouse.x !== this.mouse.oldX &&
 			this.mouse.y !== this.mouse.oldY) ||
 			this.mouse.x !== null);
@@ -125,39 +178,10 @@ class NameCanvas extends Canvas {
 				letter.mesh.rotation.z += (this.vectors[index].rotZ * rotationGaussianFactor - letter.mesh.rotation.z) * 0.1;
 			});
 		}
-
-		this.renderer.render( this.scene, this.camera );
 	}
 
-	animateCamera(time) {
-		const startTime = 0;
-		const duration = 2000;
-		const finalTime = startTime + duration;
-
-		if(time >= finalTime) {
-			return {
-				isDone: true,
-				value: 0,
-			};
-		}
-		const progress = Math.max(((time - startTime) / duration), 0);
-
-		// Rotate along x axis
-		const initialRotation = -Math.PI/2;
-
-		// Ease out quad formula
-		// const easingProgress =  progress * (2 - progress);
-		// Ease in out quad formula
-		const easingProgress = progress < .5 ?
-			2 * progress * progress :
-			-1 + (4 - 2 * progress) * progress;
-
-		const rotation = initialRotation - easingProgress * initialRotation;
-
-		return {
-			isDone: false,
-			value: rotation,
-		};
+	onResize() {
+		this.zDepth = zDepthFinder(window.innerHeight, this.cameraOptions.fov) - this.fontExtrusion;
 	}
 }
 
