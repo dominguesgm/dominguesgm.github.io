@@ -18,10 +18,3 @@
     font-style: normal;
     src: url('../../media/fonts/montserrat-bold.woff2') format('woff2');
 }
-
-@font-face {
-    font-family: 'LeagueSpartan';
-    font-weight: 700;
-    font-style: normal;
-    src: url('../../media/fonts/leaguespartan.woff') format('woff');
-}
