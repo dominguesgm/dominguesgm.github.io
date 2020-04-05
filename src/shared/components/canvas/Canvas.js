@@ -17,6 +17,7 @@ class Canvas extends Component {
 	};
 	prevTime = 0;
 	pageHasLoaded = false;
+	animationCallbacks = [];
 
 
 	componentDidMount() {
@@ -72,7 +73,9 @@ class Canvas extends Component {
 			this.trueStart = time;
 		}
 
-		this.animateScene(time - this.trueStart);
+		this.animationCallbacks.forEach((callback) => {
+			callback(time - this.trueStart);
+		});
 
 		this.prevTime = time;
 		this.requestAnimationFrameID = requestAnimationFrame( this.animate );

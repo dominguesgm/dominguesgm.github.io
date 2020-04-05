@@ -44,6 +44,8 @@ class NameCanvas extends Canvas {
 
 		this.setupObjects();
 
+		this.animationCallbacks.push(this.animateScene);
+
 	}
 
 	setupRenderer() {
@@ -97,7 +99,7 @@ class NameCanvas extends Canvas {
 		});
 	}
 
-	animateScene(time) {
+	animateScene = (time) => {
 		const cameraAnimation = this.updateCameraPosition(time);
 
 		this.updateTextPosition(time, cameraAnimation.isDone);
@@ -113,15 +115,15 @@ class NameCanvas extends Canvas {
 
 
 		if(time >= finalTime) {
-			this.camera.rotation.x = finalPosition;
+			this.camera.position.y = finalPosition;
 			return {
 				isDone: true,
 			};
 		}
 		const progress = Math.max(((time - startTime) / duration), 0);
 
-		// Rotate along x axis
-		const initialRotation = -Math.PI/2;
+		// Translate along y axis
+		const initialPosition = window.innerHeight;
 
 		// Ease out quad formula
 		// const easingProgress =  progress * (2 - progress);
@@ -130,8 +132,8 @@ class NameCanvas extends Canvas {
 			2 * progress * progress :
 			-1 + (4 - 2 * progress) * progress;
 
-		const rotation = initialRotation - easingProgress * initialRotation;
-		this.camera.rotation.x = rotation;
+		const position = initialPosition - easingProgress * initialPosition;
+		this.camera.position.y = position;
 
 		return {
 			isDone: false,
@@ -139,8 +141,6 @@ class NameCanvas extends Canvas {
 	}
 
 	updateTextPosition(time, enableInteraction) {
-		// interaction stuff
-		// TODO: setup better values
 		const stdDevX = 150;
 		const stdDevY = 150;
 
