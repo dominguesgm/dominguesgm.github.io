@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'class-names';
+import {
+	WebGLRenderer,
+	Scene,
+} from 'three';
+
+import {
+	Lighting,
+	Camera,
+	Name,
+} from './components';
+
 import styles from './Canvas.css';
 
 class Canvas extends Component {
@@ -17,6 +28,7 @@ class Canvas extends Component {
 	};
 	prevTime = 0;
 	pageHasLoaded = false;
+	objects = [];
 
 
 	componentDidMount() {
@@ -27,7 +39,7 @@ class Canvas extends Component {
 			this.pageHasLoaded = true;
 		});
 
-		this.setupTHREE();
+		this.setup();
 
 		this.requestAnimationFrameID = requestAnimationFrame( this.animate );
 	}
@@ -45,8 +57,7 @@ class Canvas extends Component {
 	}
 
 	handleResize = () => {
-		this.camera.aspect = window.innerWidth / window.innerHeight;
-		this.camera.updateProjectionMatrix();
+		this.camera.handleResize();
 
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
 
@@ -62,6 +73,24 @@ class Canvas extends Component {
 		this.onMouseMove && this.onMouseMove();
 	}
 
+	setup = () => {
+		this.scene = new Scene();
+
+		this.renderer = new WebGLRenderer({ canvas: this.canvas.current, antialias: true, alpha: true });
+		this.renderer.setSize(window.innerWidth, window.innerHeight);
+		this.renderer.setClearColor('#08090A', 0);
+
+		this.camera = new Camera();
+
+		this.lighting = new Lighting();
+		this.lighting.lights.forEach((light) => {
+			this.scene.add(light);
+		});
+
+		this.objects.push(new Name(this.camera, this.scene));
+
+	}
+
 	animate = (time) => {
 		if(!this.pageHasLoaded) {
 			this.requestAnimationFrameID = requestAnimationFrame( this.animate );
@@ -72,8 +101,14 @@ class Canvas extends Component {
 			this.trueStart = time;
 		}
 
-		this.animateScene(time - this.trueStart);
+		// Call all animations
+		const { isDone } = this.camera.animate(time - this.trueStart);
+		this.objects.forEach((object) => {
+			object.animate(time - this.trueStart, this.mouse, isDone);
+		});
 
+		// Render current frame and prepare next frame
+		this.renderer.render( this.scene, this.camera.instance );
 		this.prevTime = time;
 		this.requestAnimationFrameID = requestAnimationFrame( this.animate );
 	}
