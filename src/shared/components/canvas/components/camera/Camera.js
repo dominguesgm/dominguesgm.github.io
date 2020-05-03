@@ -31,35 +31,40 @@ class Camera {
 	};
 
 	animate = (time) => {
+
+		// Transition animation details
 		const startTime = 0;
 		const duration = 2000;
 		const finalTime = startTime + duration;
-		const finalPosition = 0;
+		// Camera should follow scroll value
+		const finalPosition = 0 - window.scrollY;
 
+		// Entry transition
+		if(time < finalTime) {
+			const progress = Math.max(((time - startTime) / duration), 0);
 
-		if(time >= finalTime) {
-			this.instance.position.y = finalPosition;
+			// Translate along y axis
+			const distanceToCover = window.innerHeight;
+
+			// Ease out quad formula
+			// const easingProgress =  progress * (2 - progress);
+			// Ease in out quad formula
+			const easingProgress = progress < .5 ?
+				2 * progress * progress :
+				-1 + (4 - 2 * progress) * progress;
+
+			const position = distanceToCover - easingProgress * distanceToCover - window.scrollY;
+			this.instance.position.y = position;
+
 			return {
-				isDone: true,
+				isDone: false,
 			};
 		}
-		const progress = Math.max(((time - startTime) / duration), 0);
 
-		// Translate along y axis
-		const initialPosition = window.innerHeight;
-
-		// Ease out quad formula
-		// const easingProgress =  progress * (2 - progress);
-		// Ease in out quad formula
-		const easingProgress = progress < .5 ?
-			2 * progress * progress :
-			-1 + (4 - 2 * progress) * progress;
-
-		const position = initialPosition - easingProgress * initialPosition;
-		this.instance.position.y = position;
+		this.instance.position.y = finalPosition;
 
 		return {
-			isDone: false,
+			isDone: true,
 		};
 	}
 
