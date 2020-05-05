@@ -23,6 +23,8 @@ class Name {
 	constructor(camera, scene) {
 		this.camera = camera;
 
+		// TODO: Rethink responsivity
+
 		const fontLoader = new FontLoader();
 		const font = fontLoader.parse(fontAsset);
 
@@ -88,7 +90,7 @@ class Name {
 	}
 
 	onResize() {
-		// reposition letters respective to new zDepth
+		// TODO: reposition letters respective to new zDepth
 	}
 }
 

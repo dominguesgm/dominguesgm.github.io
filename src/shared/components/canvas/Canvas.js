@@ -10,6 +10,7 @@ import {
 	Lighting,
 	Camera,
 	Name,
+	Laptop,
 } from './components';
 
 import styles from './Canvas.css';
@@ -89,6 +90,7 @@ class Canvas extends Component {
 		});
 
 		this.objects.push(new Name(this.camera, this.scene));
+		this.objects.push(new Laptop(this.camera, this.scene));
 
 	}
 
