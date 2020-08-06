@@ -36,8 +36,7 @@ class Camera {
 		const startTime = 0;
 		const duration = 2000;
 		const finalTime = startTime + duration;
-		// Camera should follow scroll value
-		const finalPosition = 0 - window.scrollY;
+		const finalPosition = 0;
 
 		// Entry transition
 		if(time < finalTime) {

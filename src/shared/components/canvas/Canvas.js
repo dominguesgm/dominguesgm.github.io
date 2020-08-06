@@ -90,7 +90,7 @@ class Canvas extends Component {
 		});
 
 		this.objects.push(new Name(this.camera, this.scene));
-		this.objects.push(new Laptop(this.camera, this.scene));
+		// this.objects.push(new Laptop(this.camera, this.scene));
 
 	}
 
