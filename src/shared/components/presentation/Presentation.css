@@ -15,7 +15,7 @@
 .title {
 	display: flex;
 	flex-direction: column;
-	color: var(--color-pastel-gray);
+	color: var(--color-white-smoke);
 	line-height: 1.7;
 }
 

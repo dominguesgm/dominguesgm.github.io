@@ -7,7 +7,7 @@ import {
 	gaussianFunction,
 } from '../../../../utils';
 
-import fontAsset from '../../../../media/fonts/Montserrat_Bold.json';
+import fontAsset from '../../../../media/fonts/Montserrat_Medium.json';
 
 const GAUSSIAN_PEAK = 50;
 

@@ -2,7 +2,7 @@
  Define font family mixins
 ***/
 
-@define-mixin font-montserrat $weight: 700 {
+@define-mixin font-montserrat $weight: 500 {
     font-family: 'Montserrat', sans;
     font-weight: $(weight);
 }
@@ -12,19 +12,19 @@
 ***/
 
 @define-mixin typography-h1 $unit: rem {
-    @mixin font-montserrat 700;
+    @mixin font-montserrat 500;
     font-size: 9$(unit);
     line-height: 1.5;
 }
 
 @define-mixin typography-h2 $unit: rem {
-    @mixin font-montserrat 700;
+    @mixin font-montserrat 500;
     font-size: 6.4$(unit);
     line-height: 1.5;
 }
 
 @define-mixin typography-h3 $unit: rem {
-    @mixin font-montserrat 700;
+    @mixin font-montserrat 500;
     font-size: 4.5$(unit);
     line-height: 1.5;
 }
