@@ -16,16 +16,16 @@
 
 .anchorIcon {
 	display: block;
-	margin-left: 2rem;
+	margin-left: 3rem;
 	color: inherit;
 	text-decoration: none;
-	opacity: 0;
 	transform: translateY(2rem);
+	opacity: 0;
 	transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 
 	&.entered {
-		opacity: 1;
 		transform: translateY(0);
+		opacity: 1;
 
 		& svg {
 			opacity: 0.6;

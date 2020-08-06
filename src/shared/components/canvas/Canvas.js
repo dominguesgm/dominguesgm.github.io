@@ -10,6 +10,7 @@ import {
 	Lighting,
 	Camera,
 	Name,
+	Laptop,
 } from './components';
 
 import styles from './Canvas.css';
@@ -33,7 +34,7 @@ class Canvas extends Component {
 
 	componentDidMount() {
 		window.addEventListener('mousemove', this.handleMouseMove);
-		window.addEventListener('resize', this.handleResize);
+		window.addEventListener('resize', this.handleResize, { passive: true });
 
 		window.addEventListener('load', () => {
 			this.pageHasLoaded = true;
@@ -47,6 +48,7 @@ class Canvas extends Component {
 	componentWillUnmount() {
 		// remove event listener
 		window.removeEventListener('mousemove', this.handleMouseMove);
+		window.removeEventListener('resize', this.handleResize, { passive: true });
 		cancelAnimationFrame(this.requestAnimationFrameID);
 	}
 
@@ -88,6 +90,7 @@ class Canvas extends Component {
 		});
 
 		this.objects.push(new Name(this.camera, this.scene));
+		// this.objects.push(new Laptop(this.camera, this.scene));
 
 	}
 
