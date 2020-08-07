@@ -30,8 +30,15 @@ const Bio = () => {
 
 	return (
 		<div className={styles.wrapper} ref={containerRef}>
-			<div className={styles.text} ref={textRef}>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum magna in mattis vehicula. Sed ornare consequat erat, quis semper turpis maximus et. Donec eleifend convallis dolor vel eleifend. In consequat ornare nulla, quis ultricies libero pharetra et. Aliquam nulla neque, lobortis non nisi ac, egestas sodales velit. Cras tristique interdum elit, sit amet imperdiet velit maximus ut. Proin volutpat ligula ac commodo luctus. Vestibulum bibendum scelerisque venenatis. Vestibulum bibendum lorem neque, ut luctus risus fringilla vel. Nunc in risus eleifend, ornare nisi eu, aliquet est. Quisque nibh orci, bibendum gravida rhoncus a, gravida et metus.
+			<div className={styles.textContainer} ref={textRef}>
+				<div className={styles.bio}>
+					<div className={styles.miniBio}>
+						I'm a Software Engineer currently based in <strong>Porto</strong>, working on frontend but with a strong interest in all aspects of the software world.
+					</div>
+					<div className={styles.reading}>
+
+					</div>
+				</div>
 			</div>
 		</div>
 	);

@@ -16,9 +16,19 @@
 	padding-left: var(--layout-horizontal-padding);
 }
 
-.text {
+.textContainer {
+	display: flex;
 	width: 100%;
+	padding: 0 5rem;
 	color: var(--color-white-smoke);
 	opacity: 0;
 	transition: transform 0.1s linear;
+}
+
+.bio {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 50%;
+	font-size: 3rem;
 }
