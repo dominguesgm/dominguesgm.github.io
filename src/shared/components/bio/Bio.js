@@ -19,7 +19,7 @@ const Bio = () => {
 		console.log('percentage', percentage);
 
 		textRef.current.style.opacity = percentage;
-		textRef.current.style.transform = `scale(${ 0.5 + (percentage * 0.5) })`;
+		textRef.current.style.transform = `scale(${ 0.7 + (percentage * 0.3) })`;
 	};
 
 
