@@ -36,7 +36,8 @@ class Camera {
 		const startTime = 0;
 		const duration = 2000;
 		const finalTime = startTime + duration;
-		const finalPosition = 0;
+		const finalYPosition = 0;
+		let finalZPosition = 0;
 
 		// Entry transition
 		if(time < finalTime) {
@@ -52,15 +53,19 @@ class Camera {
 				2 * progress * progress :
 				-1 + (4 - 2 * progress) * progress;
 
-			const position = distanceToCover - easingProgress * distanceToCover - window.scrollY;
+			const position = distanceToCover - easingProgress * distanceToCover;
 			this.instance.position.y = position;
 
 			return {
 				isDone: false,
 			};
+		} else {
+			const scrollProgress = window.scrollY / window.innerHeight;
+			finalZPosition = scrollProgress * this.zDepth;
 		}
 
-		this.instance.position.y = finalPosition;
+		this.instance.position.y = finalYPosition;
+		this.instance.position.z = finalZPosition;
 
 		return {
 			isDone: true,
