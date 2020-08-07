@@ -2,32 +2,28 @@ import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'class-names';
 import useWindowDimension from '../../hooks/window-dimension/useWindowDimension';
 import { clampValue } from '../../utils';
-import styles from './Presentation.css';
+import styles from './Hero.css';
 
-const Presentation = () => {
+const Hero = () => {
 	const containerRef = useRef();
-	const greetingRef = useRef();
-	const jobRef = useRef();
+	const titleRef = useRef();
 	const [entered, setEntered] = useState(false);
 	const windowDimension = useWindowDimension();
+	const heightThreshold = windowDimension.height;
 
 	const moveContainer = () => {
-		const yDistance = clampValue(window.scrollY, 0, windowDimension.height);
-		const percentage = window.scrollY / windowDimension.height;
+		const yDistance = clampValue(window.scrollY, 0, heightThreshold);
+		const percentage = yDistance / heightThreshold;
 
 		if(!containerRef.current.style.position ||
-			(containerRef.current.style.position === 'relative' && yDistance < windowDimension.height)) {
+			(containerRef.current.style.position === 'relative' && yDistance < heightThreshold)) {
 			containerRef.current.style.position = 'sticky';
-		} else if(containerRef.current.style.position === 'sticky' && yDistance >= windowDimension.height) {
+		} else if(containerRef.current.style.position === 'sticky' && yDistance >= heightThreshold) {
 			containerRef.current.style.position = 'relative';
 		}
 
-		// TODO: fade effects
-
-		greetingRef.current.style.opacity = 1 - percentage;
-		greetingRef.current.style.transform = `scale(${(percentage * 1) + 1}) translateY(${-percentage*10}rem)`;
-		jobRef.current.style.opacity = 1 - percentage;
-		jobRef.current.style.transform = `scale(${(percentage * 1) + 1})  translateY(${percentage*10}rem)`;
+		titleRef.current.style.opacity = 1 - percentage;
+		titleRef.current.style.transform = `scale(${(percentage * 2) + 1})`;
 	};
 
 
@@ -40,17 +36,17 @@ const Presentation = () => {
 
 	return (
 		<div className={styles.wrapper} ref={containerRef}>
-			<h2 className={styles.title}>
+			<h2 className={styles.title} ref={titleRef}>
 				<div className={classNames(styles.greetingWrapper, entered && styles.entered)}>
-					<div className={styles.greeting} ref={greetingRef}>Hello, I'm</div>
+					Hello, I'm
 				</div>
 				<div className={styles.name}>Gil Domingues</div>
 				<div className={classNames(styles.jobWrapper, entered && styles.entered)}>
-					<div className={styles.job} ref={jobRef}>Software Engineer</div>
+					Software Engineer
 				</div>
 			</h2>
 		</div>
 	);
 };
 
-export default Presentation;
+export default Hero;

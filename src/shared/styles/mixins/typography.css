@@ -37,7 +37,7 @@
 
 @define-mixin typography-copy $unit: rem {
     @mixin font-montserrat 500;
-    font-size: 1.6$(unit);
+    font-size: 2$(unit);
     line-height: 1.5;
 }
 

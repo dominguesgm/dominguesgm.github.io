@@ -1,12 +1,14 @@
+@import '../../styles/variables.css';
+
 .canvas {
 	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: var(--zindex-canvas);
 	width: 100vw;
 	height: 100vh;
 }
 
 .notTouchable {
-	z-index: 1;
 	pointer-events: none;
 }
