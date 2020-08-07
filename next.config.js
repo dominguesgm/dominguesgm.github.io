@@ -11,7 +11,7 @@ module.exports = withPlugins([
 			cssModules: true,
 			cssLoaderOptions: {
 				importLoaders: 1,
-				localIdentName: '[local]___[hash:base64:5]',
+				localIdentName: process.env.NODE_ENV === 'development' ? '[name]_[local]___[hash:base64:5]' : '[hash:base64:5]',
 			},
 		},
 	], [

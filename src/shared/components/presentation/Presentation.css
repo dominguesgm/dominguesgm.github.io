@@ -1,6 +1,8 @@
 @import '../../styles/variables.css';
 
 .wrapper {
+	position: sticky;
+	top: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -19,9 +21,10 @@
 	line-height: 1.7;
 }
 
-.greeting {
+.greetingWrapper {
 	align-self: center;
 	transform: translateX(-10rem);
+	transform-origin: bottom;
 	opacity: 0;
 	transition: transform 1s ease-in-out 2s, opacity 1s ease-in-out 2s;
 
@@ -31,9 +34,10 @@
 	}
 }
 
-.job {
+.jobWrapper {
 	align-self: center;
 	transform: translateX(10rem);
+	transform-origin: top;
 	opacity: 0;
 	transition: transform 1s ease-in-out 2.3s, opacity 1s ease-in-out 2.3s;
 

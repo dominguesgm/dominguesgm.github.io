@@ -32,7 +32,12 @@ const gaussianFunction = (x, peakBase, stdDev) => {
 	return result;
 };
 
+const clampValue = (value, min, max) => {
+	return Math.min(max, Math.max(min, value));
+};
+
 export {
 	generateVectors,
 	gaussianFunction,
+	clampValue,
 };

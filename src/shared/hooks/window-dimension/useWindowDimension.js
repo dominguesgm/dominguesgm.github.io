@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 
 const useWindowDimension = () => {
-	const isSSR = window === undefined;
+	const isSSR = typeof(window) === 'undefined';
 
 	const [windowSize, setWindowSize] = useState({
-		width: isSSR ? 1440 : undefined,
-		height: isSSR ? 800 : undefined,
+		width: isSSR ? 1440 : window.innerWidth,
+		height: isSSR ? 800 : window.innerHeight,
 	});
 
 	const resizeWindow = () => {

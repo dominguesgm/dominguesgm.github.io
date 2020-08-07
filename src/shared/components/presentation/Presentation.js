@@ -1,24 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'class-names';
+import useWindowDimension from '../../hooks/window-dimension/useWindowDimension';
+import { clampValue } from '../../utils';
 import styles from './Presentation.css';
 
-//TODO: attempt to use 3d fonts with threejs for the name
-
 const Presentation = () => {
-
+	const containerRef = useRef();
+	const greetingRef = useRef();
+	const jobRef = useRef();
 	const [entered, setEntered] = useState(false);
+	const windowDimension = useWindowDimension();
+
+	const moveContainer = () => {
+		const yDistance = clampValue(window.scrollY, 0, windowDimension.height);
+		const percentage = window.scrollY / windowDimension.height;
+
+		if(!containerRef.current.style.position ||
+			(containerRef.current.style.position === 'relative' && yDistance < windowDimension.height)) {
+			containerRef.current.style.position = 'sticky';
+		} else if(containerRef.current.style.position === 'sticky' && yDistance >= windowDimension.height) {
+			containerRef.current.style.position = 'relative';
+		}
+
+		// TODO: fade effects
+
+		greetingRef.current.style.opacity = 1 - percentage;
+		greetingRef.current.style.transform = `scale(${(percentage * 1) + 1}) translateY(${-percentage*10}rem)`;
+		jobRef.current.style.opacity = 1 - percentage;
+		jobRef.current.style.transform = `scale(${(percentage * 1) + 1})  translateY(${percentage*10}rem)`;
+	};
 
 
 	useEffect(() => {
 		setEntered(true);
+
+		typeof(window) !== undefined && window.addEventListener('scroll', moveContainer, { passive: true });
+		return () => typeof(window) !== undefined && window.removeEventListener('scroll', moveContainer, { passive: true });
 	});
 
 	return (
-		<div className={styles.wrapper}>
+		<div className={styles.wrapper} ref={containerRef}>
 			<h2 className={styles.title}>
-				<div className={classNames(styles.greeting, entered && styles.entered)}>Hello, I'm</div>
+				<div className={classNames(styles.greetingWrapper, entered && styles.entered)}>
+					<div className={styles.greeting} ref={greetingRef}>Hello, I'm</div>
+				</div>
 				<div className={styles.name}>Gil Domingues</div>
-				<div className={classNames(styles.job, entered && styles.entered)}>Software Engineer</div>
+				<div className={classNames(styles.jobWrapper, entered && styles.entered)}>
+					<div className={styles.job} ref={jobRef}>Software Engineer</div>
+				</div>
 			</h2>
 		</div>
 	);
