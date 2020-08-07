@@ -1,0 +1,24 @@
+@import '../../styles/variables.css';
+
+.wrapper {
+	position: sticky;
+	top: 0;
+	z-index: var(--zindex-bio);
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	width: 100%;
+	max-width: 192rem;
+	height: 100vh;
+	margin: 0 auto;
+	padding-right: var(--layout-horizontal-padding);
+	padding-left: var(--layout-horizontal-padding);
+}
+
+.text {
+	width: 100%;
+	color: var(--color-white-smoke);
+	opacity: 0;
+	transition: transform 0.1s linear;
+}

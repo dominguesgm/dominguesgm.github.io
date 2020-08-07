@@ -3,6 +3,7 @@
 .wrapper {
 	position: sticky;
 	top: 0;
+	z-index: var(--zindex-presentation);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -45,6 +46,11 @@
 		transform: translateY(0);
 		opacity: 1;
 	}
+}
+
+.greeting,
+.job {
+	transition: transform 0.1s linear;
 }
 
 .name {

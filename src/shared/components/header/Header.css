@@ -2,7 +2,7 @@
 
 .header {
 	position: fixed;
-	z-index: 2;
+	z-index: var(--zindex-header);
 	display: flex;
 	flex-direction: row;
 	align-items: center;

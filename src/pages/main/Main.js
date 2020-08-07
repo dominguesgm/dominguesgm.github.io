@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Canvas, Presentation } from '../../shared/components';
+import { Header, Canvas, Presentation, Bio } from '../../shared/components';
 
 import styles from './Main.css';
 
@@ -8,6 +8,7 @@ const Main = () => (
 		<Header />
 		<Canvas isTouchable={ false } />
 		<Presentation />
+		<Bio />
 	</div>
 );
 

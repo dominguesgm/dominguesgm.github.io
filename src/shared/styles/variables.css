@@ -7,4 +7,8 @@
 
 	--layout-header-height: 8rem;
 	--layout-horizontal-padding: 5rem;
+
+	--zindex-header: 1000;
+	--zindex-canvas: 999;
+	--zindex-presentation: 100;
 }

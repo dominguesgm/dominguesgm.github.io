@@ -60,8 +60,9 @@ class Camera {
 				isDone: false,
 			};
 		} else {
-			const scrollProgress = window.scrollY / window.innerHeight;
-			finalZPosition = scrollProgress * this.zDepth;
+			const heightThreshold = window.innerHeight;
+			const scrollProgress = window.scrollY / heightThreshold;
+			finalZPosition = this.instance.position.z + (scrollProgress * this.zDepth - this.instance.position.z) * 0.1;
 		}
 
 		this.instance.position.y = finalYPosition;
