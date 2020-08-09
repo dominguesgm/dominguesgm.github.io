@@ -76,6 +76,7 @@ class Camera {
 	handleResize = () => {
 		this.instance.aspect = window.innerWidth / window.innerHeight;
 		this.instance.updateProjectionMatrix();
+		this.updateZDepth();
 	}
 }
 

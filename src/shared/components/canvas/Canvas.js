@@ -60,8 +60,10 @@ class Canvas extends Component {
 
 	handleResize = () => {
 		this.camera.handleResize();
+		this.objects.forEach((item) => item.handleResize());
 
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
+
 
 		this.onResize && this.onResize();
 	}

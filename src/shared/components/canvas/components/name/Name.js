@@ -49,6 +49,14 @@ class Name {
 		});
 	}
 
+	handleResize = () => {
+		// This resize must come after camera resize
+
+		this.text.letterMeshes.forEach((letter) => {
+			letter.posZ = this.camera.zDepth;
+		});
+	}
+
 	animate(time, mouse, enableInteraction) {
 		const stdDevX = 150;
 		const stdDevY = 150;
@@ -87,10 +95,6 @@ class Name {
 				letter.mesh.rotation.z += (this.vectors[index].rotZ * rotationGaussianFactor - letter.mesh.rotation.z) * 0.1;
 			});
 		}
-	}
-
-	onResize() {
-		// TODO: reposition letters respective to new zDepth
 	}
 }
 

@@ -27,8 +27,6 @@ const ScrollHint = () => {
 		};
 	}, []);
 
-	console.log('visible', visible);
-
 	return (
 		<div className={classNames(styles.hint, visible && styles.visible)}>
 			<div className={classNames(styles.text, visible && styles.visible)}>
