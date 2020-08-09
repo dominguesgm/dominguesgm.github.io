@@ -14,13 +14,14 @@
 	margin: 0 auto;
 	padding-right: var(--layout-horizontal-padding);
 	padding-left: var(--layout-horizontal-padding);
+	color: var(--color-white-smoke);
 }
 
-.textContainer {
+.container {
 	display: flex;
+	flex-direction: column;
 	width: 100%;
 	padding: 0 5rem;
-	color: var(--color-white-smoke);
 	opacity: 0;
 	transition: transform 0.1s linear;
 }
@@ -30,5 +31,6 @@
 	flex-direction: column;
 	justify-content: space-between;
 	width: 50%;
-	font-size: 3rem;
+	margin-bottom: 5rem;
+	font-size: 2.4rem;
 }

@@ -31,13 +31,19 @@
 
 @define-mixin typography-h4 $unit: rem {
     @mixin font-montserrat 500;
-    font-size: 2.4$(unit);
+    font-size: 3.2$(unit);
+    line-height: 1.5;
+}
+
+@define-mixin typography-h5 $unit: rem {
+    @mixin font-montserrat 500;
+    font-size: 2.8$(unit);
     line-height: 1.5;
 }
 
 @define-mixin typography-copy $unit: rem {
     @mixin font-montserrat 500;
-    font-size: 2$(unit);
+    font-size: 2.4$(unit);
     line-height: 1.5;
 }
 
