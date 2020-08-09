@@ -36,7 +36,7 @@ const Bio = () => {
 				<div className={styles.bio}>
 					<div className={styles.miniBio}>
 						I'm a Software Engineer currently based in <strong>Porto</strong>, with an interest in all aspects of software.
-						From frontend to backend, high or low level, if it envolves building software, it's my <i>thing</i>.
+						From frontend to backend, high or low level: if it envolves building software, it's my <i>thing</i>.
 					</div>
 				</div>
 				<ExternalLinks visible={visible} />

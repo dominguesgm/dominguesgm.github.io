@@ -5,26 +5,26 @@ import cv from '../media/files/CV.pdf';
 
 export const socialOnly = [
 	{
-		name: 'Twitter',
-		url: 'https://twitter.com/dominguesgm',
-	},
-	{
 		name: 'LinkedIn',
 		url: 'https://www.linkedin.com/in/gildomingues',
 		icon: faLinkedin,
+	},
+	{
+		name: 'Twitter',
+		url: 'https://twitter.com/dominguesgm',
 	},
 ];
 
 export const otherExternals = [
 	{
-		name: 'Github',
-		url: 'https://github.com/dominguesgm',
-		icon: faGithub,
-	},
-	{
 		name: 'CV',
 		url: cv,
 		icon: faFileAlt,
+	},
+	{
+		name: 'Github',
+		url: 'https://github.com/dominguesgm',
+		icon: faGithub,
 	},
 ];
 
