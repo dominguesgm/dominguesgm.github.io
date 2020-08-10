@@ -12,8 +12,7 @@
 	max-width: 192rem;
 	height: 100vh;
 	margin: 0 auto;
-	padding-right: var(--layout-horizontal-padding);
-	padding-left: var(--layout-horizontal-padding);
+	padding: 0 var(--layout-horizontal-padding);
 	color: var(--color-white-smoke);
 }
 

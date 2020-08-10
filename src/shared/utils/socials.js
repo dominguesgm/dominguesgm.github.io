@@ -13,18 +13,22 @@ export const socialOnly = [
 		name: 'Twitter',
 		url: 'https://twitter.com/dominguesgm',
 	},
+	{
+		name: 'Email',
+		url: 'mailto:gil.domingues2@hotmail.com',
+	},
 ];
 
 export const otherExternals = [
 	{
-		name: 'CV',
-		url: cv,
-		icon: faFileAlt,
-	},
-	{
 		name: 'Github',
 		url: 'https://github.com/dominguesgm',
 		icon: faGithub,
+	},
+	{
+		name: 'Resume',
+		url: cv,
+		icon: faFileAlt,
 	},
 ];
 

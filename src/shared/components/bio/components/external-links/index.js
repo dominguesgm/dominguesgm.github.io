@@ -11,7 +11,7 @@ const ExternalLinks = ({ visible }) => {
 			<div className={styles.others}>
 				{
 					otherExternals.map(({ name, url }, index) => {
-						const delay = index * 0.3 + 0.8 + (socialOnly.length * 0.3);
+						const delay = index * 0.3 + 0.8;
 						return (
 							<a
 								key={name}
@@ -19,7 +19,7 @@ const ExternalLinks = ({ visible }) => {
 								target="_blank"
 								href={url}
 								style={{ transitionDelay: `${delay}s, ${delay}s, 0s` }}>
-								{name}
+								<span className={styles.innerOtherLink}>{name}</span>
 							</a>
 						);})
 				}
@@ -34,7 +34,7 @@ const ExternalLinks = ({ visible }) => {
 			<div className={styles.socials}>
 				{
 					socialOnly.map(({ name, url }, index) => {
-						const delay = index * 0.3 + 0.8;
+						const delay = index * 0.3 + 0.8 + (otherExternals.length * 0.3);
 						return (
 							<a
 								key={name}
@@ -42,7 +42,7 @@ const ExternalLinks = ({ visible }) => {
 								target="_blank"
 								href={url}
 								style={{ transitionDelay: `${delay}s, ${delay}s, 0s` }}>
-								{name}
+								<span className={styles.innerSocialLink}>{name}</span>
 							</a>
 						);})
 				}

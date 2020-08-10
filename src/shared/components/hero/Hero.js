@@ -38,7 +38,7 @@ const Hero = () => {
 		<div className={styles.wrapper} ref={containerRef}>
 			<h2 className={styles.title} ref={titleRef}>
 				<div className={classNames(styles.greetingWrapper, entered && styles.entered)}>
-					Hello, I'm
+					Hey, I'm
 				</div>
 				<div className={styles.name}>Gil Domingues</div>
 				<div className={classNames(styles.jobWrapper, entered && styles.entered)}>

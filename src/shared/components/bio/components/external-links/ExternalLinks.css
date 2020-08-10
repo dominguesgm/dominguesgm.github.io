@@ -89,3 +89,18 @@
 	transform: none;
 	opacity: 1;
 }
+
+.innerSocialLink,
+.innerOtherLink {
+	display: inline-block;
+	transform: none;
+	transition: transform 0.2s ease-in-out;
+}
+
+.innerOtherLink:hover {
+	transform: translateX(-1rem);
+}
+
+.innerSocialLink:hover {
+	transform: translateX(1rem);
+}
