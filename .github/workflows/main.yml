@@ -34,3 +34,9 @@ jobs:
     # Runs a single command using the runners shell
     - name: Build and Export static version of the site
       run: npm run export
+      
+    - name: Push updates to docs/ folder
+      run: |
+        git add .
+        git commit -m "[BUILD] github actions build"
+        git push origin master
