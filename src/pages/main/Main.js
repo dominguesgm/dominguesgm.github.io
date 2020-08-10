@@ -7,8 +7,8 @@ import styles from './Main.css';
 const Main = () => (
 	<div className={ styles.root }>
 		<Canvas isTouchable={ false } />
-		<ScrollHint />
 		<Hero />
+		<ScrollHint />
 		<Bio />
 	</div>
 );
