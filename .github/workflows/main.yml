@@ -36,9 +36,16 @@ jobs:
     # Runs a single command using the runners shell
     - name: Build and Export static version of the site
       run: npm run export
-      
+        
+    - name: Add & Commit
+      uses: EndBug/add-and-commit@v4.4.0
+      with:
+        # Arguments for the git add command
+        add: .
+        # The name of the user that will be displayed as the author of the commit
+        author_name: GithubActions
+        # The message for the commit
+        message: "[BUILD] github actions build"
+        
     - name: Push updates to docs/ folder
-      run: |
-        git add .
-        git commit -m "[BUILD] github actions build"
-        git push origin master
+      run: git push origin master
