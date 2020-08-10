@@ -1,4 +1,4 @@
-# Personal Site
+## Personal Site
 
 Welcome to the mess that is the codebase of my personal site.
 
