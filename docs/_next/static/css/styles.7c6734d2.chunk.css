@@ -761,11 +761,13 @@ body {
 	color: #f7f7f2;
 	transform: translate(-50%, 0);
 	opacity: 0;
-	transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out
+	transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+	pointer-events: none
 
 }
 ._23R5h._2FAhd {
 		opacity: 1;
+		pointer-events: all;
 	}
 ._23R5h:hover {
 		transform: translate(-50%, -1rem);
