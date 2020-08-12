@@ -6,7 +6,7 @@
 	align-items: center;
 	align-self: flex-end;
 	width: 50%;
-	width: 31.4rem;
+	width: 31rem;
 }
 
 .socials {
@@ -24,11 +24,13 @@
 
 .titles {
 	margin: 2rem 0;
+	font-weight: lighter;
+	text-align: center;
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
 
 	&.visible {
-		opacity: 1;
+		opacity: 0.4;
 	}
 }
 

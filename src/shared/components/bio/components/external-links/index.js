@@ -5,13 +5,15 @@ import { socialOnly, otherExternals } from '../../../../utils/socials';
 
 import styles from './ExternalLinks.css';
 
+const LINK_ANIMATION_DURATION = 0.2;
+
 const ExternalLinks = ({ visible }) => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.others}>
 				{
 					otherExternals.map(({ name, url }, index) => {
-						const delay = index * 0.3 + 0.8;
+						const delay = index * LINK_ANIMATION_DURATION + 0.8;
 						return (
 							<a
 								key={name}
@@ -34,7 +36,8 @@ const ExternalLinks = ({ visible }) => {
 			<div className={styles.socials}>
 				{
 					socialOnly.map(({ name, url }, index) => {
-						const delay = index * 0.3 + 0.8 + (otherExternals.length * 0.3);
+						const delay = index * LINK_ANIMATION_DURATION + 0.8 +
+							(otherExternals.length * LINK_ANIMATION_DURATION);
 						return (
 							<a
 								key={name}
