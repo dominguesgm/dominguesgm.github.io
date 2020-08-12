@@ -21,6 +21,7 @@ class Camera {
 		);
 
 		this.updateZDepth();
+		console.log('this.zDepth', this.zDepth);
 	}
 
 	updateZDepth = () => {

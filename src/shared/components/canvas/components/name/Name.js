@@ -27,6 +27,7 @@ class Name {
 
 		const fontLoader = new FontLoader();
 		const font = fontLoader.parse(fontAsset);
+		console.log('font', font);
 
 		const options = {
 			font: font,
@@ -37,6 +38,7 @@ class Name {
 
 		// Creating text mesh and adding to scene
 		this.text = new Text('Gil Domingues', null, options);
+		console.log('this.text', this.text);
 		this.text.addToScene(scene);
 		this.vectors = generateVectors(13, this.camera.zDepth, GAUSSIAN_PEAK);
 

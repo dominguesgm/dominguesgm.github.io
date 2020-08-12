@@ -20,6 +20,7 @@ const Text = function (text, material, options) {
 			height: this.options.fontExtrusion,
 			curveSegments: this.options.curveSegments,
 		});
+		console.log('name', name);
 
 		const letterWidth = this.options.font.data.glyphs[text[i]].ha * scale;
 		const letterHeight = this.options.fontSize;
