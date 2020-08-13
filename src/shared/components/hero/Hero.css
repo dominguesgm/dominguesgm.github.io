@@ -22,6 +22,7 @@
 	color: var(--color-white-smoke);
 	line-height: 1.7;
 	transition: transform 0.1s linear;
+	will-change: transform;
 }
 
 .greetingWrapper {
@@ -29,6 +30,7 @@
 	transform-origin: bottom;
 	opacity: 0;
 	transition: transform 1s ease-in-out 2s, opacity 1s ease-in-out 2s;
+	will-change: transform, opacity;
 
 	&.entered {
 		transform: translateY(0);
@@ -41,6 +43,7 @@
 	transform-origin: top;
 	opacity: 0;
 	transition: transform 1s ease-in-out 2.3s, opacity 1s ease-in-out 2.3s;
+	will-change: transform, opacity;
 
 	&.entered {
 		transform: translateY(0);

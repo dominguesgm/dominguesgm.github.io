@@ -507,6 +507,7 @@ body {
 	transform: translateY(2rem);
 	opacity: 0;
 	transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+	will-change: transform, opacity;
 }
 
 ._3fylP._1bE1w {
@@ -518,6 +519,7 @@ body {
 		transform: none;
 		opacity: 0.8;
 		transition: transform 0.2s ease-in-out 0.1s, opacity 0.2s ease-in-out 0.1s;
+		will-change: transform, opacity;
 	}
 
 ._3fylP._1bE1w:hover ._2Ie1Z,
@@ -525,6 +527,7 @@ body {
 		transform: translateY(-0.5rem);
 		opacity: 1;
 		transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+		will-change: transform, opacity;
 	}
 
 ._3fylP._1bE1w::after {
@@ -569,13 +572,15 @@ body {
 	color: #f7f7f2;
 	line-height: 1.7;
 	transition: transform 0.1s linear;
+	will-change: transform;
 }
 
 ._3O4hQ {
 	transform: translateX(-10rem);
 	transform-origin: bottom;
 	opacity: 0;
-	transition: transform 1s ease-in-out 2s, opacity 1s ease-in-out 2s
+	transition: transform 1s ease-in-out 2s, opacity 1s ease-in-out 2s;
+	will-change: transform, opacity
 }
 
 ._3O4hQ._2brJ- {
@@ -587,7 +592,8 @@ body {
 	transform: translateX(10rem);
 	transform-origin: top;
 	opacity: 0;
-	transition: transform 1s ease-in-out 2.3s, opacity 1s ease-in-out 2.3s
+	transition: transform 1s ease-in-out 2.3s, opacity 1s ease-in-out 2.3s;
+	will-change: transform, opacity
 }
 
 .Zk5ib._2brJ- {
@@ -638,7 +644,8 @@ body {
 	display: inline-block;
 	transform: translate(-2rem, 2rem);
 	opacity: 0;
-	transition: opacity 0.5s ease-in-out 0.3s, transform 0.5s ease-in-out 0.3s
+	transition: opacity 0.5s ease-in-out 0.3s, transform 0.5s ease-in-out 0.3s;
+	will-change: transform, opacity
 }
 
 .AosFG._2H7CT {
@@ -650,7 +657,8 @@ body {
 	display: inline-block;
 	transform: translate(2rem, -2rem);
 	opacity: 0;
-	transition: opacity 0.5s ease-in-out 0.3s, transform 0.5s ease-in-out 0.3s
+	transition: opacity 0.5s ease-in-out 0.3s, transform 0.5s ease-in-out 0.3s;
+	will-change: transform, opacity
 }
 
 ._3qYJ6._2H7CT {
@@ -731,6 +739,7 @@ body {
 	padding: 0 5rem;
 	opacity: 0;
 	transition: transform 0.1s linear;
+	will-change: transform;
 }
 
 .gf-1q {
@@ -761,7 +770,8 @@ body {
 	transform: translate(-50%, 0);
 	opacity: 0;
 	transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-	pointer-events: none
+	pointer-events: none;
+	will-change: transform, opacity
 
 }
 ._23R5h._2FAhd {
@@ -780,7 +790,8 @@ body {
 
 	transform: translateY(1rem);
 	opacity: 0;
-	transition: opacity 0.4s ease-in-out 3.5s, transform 0.4s ease-in-out 3.5s
+	transition: opacity 0.4s ease-in-out 3.5s, transform 0.4s ease-in-out 3.5s;
+	will-change: transform, opacity
 }
 ._1JEG8._2FAhd {
 		transform: none;
@@ -789,7 +800,8 @@ body {
 .Q6p-p {
 	transform: translateY(1rem);
 	opacity: 0;
-	transition: opacity 0.3s ease-in-out 3.9s, transform 0.3s ease-in-out 3.9s
+	transition: opacity 0.3s ease-in-out 3.9s, transform 0.3s ease-in-out 3.9s;
+	will-change: transform, opacity
 }
 .Q6p-p._2FAhd {
 		transform: none;
