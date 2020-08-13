@@ -92,10 +92,13 @@ class Canvas extends Component {
 	}
 
 	animate = (time) => {
-		if(!window.GLOBAL_PAGE_HAS_LOADED) {
-			this.requestAnimationFrameID = requestAnimationFrame( this.animate );
-			return false;
-		}
+		// This was used to wait for external assets to load before starting to animate webgl
+		// and thus sync up threejs and css animations
+
+		// if(!window.GLOBAL_PAGE_HAS_LOADED) {
+		// 	this.requestAnimationFrameID = requestAnimationFrame( this.animate );
+		// 	return false;
+		// }
 
 		if(this.trueStart == undefined) {
 			this.trueStart = time;
