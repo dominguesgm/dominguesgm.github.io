@@ -29,7 +29,7 @@ const ExternalLinks = ({ visible }) => {
 
 			<h5 className={classNames(styles.titles, visible && styles.visible)}>
 				<span className={classNames(styles.reach, visible && styles.visible)}>
-							Reach Me
+							Let's talk
 				</span> / <span className={classNames(styles.more, visible && styles.visible)}>
 							More Stuff
 				</span></h5>

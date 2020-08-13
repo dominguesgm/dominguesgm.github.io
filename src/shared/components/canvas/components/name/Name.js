@@ -58,8 +58,8 @@ class Name {
 	}
 
 	animate(time, mouse, enableInteraction) {
-		const stdDevX = 150;
-		const stdDevY = 150;
+		const stdDevX = 0.25;
+		const stdDevY = 2.5;
 
 		const shouldAnimateText = enableInteraction &&
 			((mouse.x !== mouse.oldX &&
@@ -67,12 +67,12 @@ class Name {
 			mouse.x !== null);
 
 		if(shouldAnimateText) {
-			this.text.letterMeshes.forEach((letter, index) => {
-				const xAlongText = mouse.x - (window.innerWidth/2) + (this.text.width/2);
-				const yAlongText = mouse.y - (window.innerHeight/2) + (this.text.height/2);
+			const xAlongText = (mouse.x - (window.innerWidth/2) + (this.text.width/2)) / this.text.width;
+			const yAlongText = (mouse.y - (window.innerHeight/2) + (this.text.height/2)) / this.text.height;
 
+			this.text.letterMeshes.forEach((letter, index) => {
 				const gaussianFactorX = gaussianFunction(
-					letter.transX,
+					letter.transX / this.text.width,
 					xAlongText,
 					stdDevX
 				);
