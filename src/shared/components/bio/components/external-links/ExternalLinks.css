@@ -39,6 +39,7 @@
 	transform: translate(-2rem, 2rem);
 	opacity: 0;
 	transition: opacity 0.5s ease-in-out 0.3s, transform 0.5s ease-in-out 0.3s;
+	will-change: transform, opacity;
 
 	&.visible {
 		transform: none;
@@ -51,6 +52,7 @@
 	transform: translate(2rem, -2rem);
 	opacity: 0;
 	transition: opacity 0.5s ease-in-out 0.3s, transform 0.5s ease-in-out 0.3s;
+	will-change: transform, opacity;
 
 	&.visible {
 		transform: none;
