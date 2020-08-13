@@ -7,4 +7,5 @@
 	flex-direction: column;
 	height: 300vh;
 	background-color: var(--color-smoky-black);
+	cursor: none !important;
 }

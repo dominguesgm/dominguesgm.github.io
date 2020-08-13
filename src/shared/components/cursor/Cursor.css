@@ -1,0 +1,22 @@
+@import "../../styles/variables.css";
+
+.cursor {
+	position: fixed;
+	top: calc(50% - 1rem);
+	left: calc(50% - 1rem);
+	z-index: var(--zindex-cursor);
+	width: 2rem;
+	height: 2rem;
+	background-color: var(--color-white-smoke);
+	border-radius: 50%;
+	transform: translate(0, 0);
+	opacity: 0;
+	mix-blend-mode: difference;
+	transition: transform 0.1s linear, opacity;
+	pointer-events: none;
+	will-change: transform, opacity;
+}
+
+.cursor.visible {
+	opacity: 1;
+}

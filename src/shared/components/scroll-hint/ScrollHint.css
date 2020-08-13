@@ -23,7 +23,6 @@
 
 	&:hover {
 		transform: translate(-50%, -1rem);
-		cursor: pointer;
 	}
 
 }

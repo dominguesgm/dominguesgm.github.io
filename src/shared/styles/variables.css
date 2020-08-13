@@ -10,6 +10,7 @@
 	--layout-header-height: 8rem;
 	--layout-horizontal-padding: 5rem;
 
+	--zindex-cursor: 1001;
 	--zindex-header: 1000;
 	--zindex-scroll-hint: 1000;
 	--zindex-canvas: 999;
