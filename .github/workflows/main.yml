@@ -6,10 +6,7 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: 
-      - master
-  pull_request:
-    branches: 
+    branches:
       - master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -23,20 +20,20 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-      
+
     - name: Setup Node.js environment
       uses: actions/setup-node@v2.1.1
       with:
         # Version Spec of the version to use.  Examples: 12.x, 10.15.1, >=10.15.0
         node-version: 12.x
-      
+
     - name: Installs dependencies
       run: npm i
 
     # Runs a single command using the runners shell
     - name: Build and Export static version of the site
       run: npm run export
-        
+
     - name: Add & Commit
       uses: EndBug/add-and-commit@v4.4.0
       with:
@@ -46,6 +43,6 @@ jobs:
         author_name: GithubActions
         # The message for the commit
         message: "[BUILD] github actions build"
-        
+
     - name: Push updates to docs/ folder
       run: git push origin master
