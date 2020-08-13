@@ -565,13 +565,13 @@ body {
 ._2ADpf {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	color: #f7f7f2;
 	line-height: 1.7;
 	transition: transform 0.1s linear;
 }
 
 ._3O4hQ {
-	align-self: center;
 	transform: translateX(-10rem);
 	transform-origin: bottom;
 	opacity: 0;
@@ -584,7 +584,6 @@ body {
 	}
 
 .Zk5ib {
-	align-self: center;
 	transform: translateX(10rem);
 	transform-origin: top;
 	opacity: 0;
@@ -607,7 +606,7 @@ body {
 	align-items: center;
 	align-self: flex-end;
 	width: 50%;
-	width: 31rem;
+	width: 29.5rem;
 }
 
 ._1H076 {
