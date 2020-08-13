@@ -28,17 +28,12 @@ class Canvas extends Component {
 		oldY: null,
 	};
 	prevTime = 0;
-	pageHasLoaded = false;
 	objects = [];
 
 
 	componentDidMount() {
 		window.addEventListener('mousemove', this.handleMouseMove);
 		window.addEventListener('resize', this.handleResize, { passive: true });
-
-		window.addEventListener('load', () => {
-			this.pageHasLoaded = true;
-		});
 
 		this.setup();
 
@@ -97,7 +92,7 @@ class Canvas extends Component {
 	}
 
 	animate = (time) => {
-		if(!this.pageHasLoaded) {
+		if(!window.GLOBAL_PAGE_HAS_LOADED) {
 			this.requestAnimationFrameID = requestAnimationFrame( this.animate );
 			return false;
 		}
