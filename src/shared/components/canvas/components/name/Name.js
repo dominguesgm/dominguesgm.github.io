@@ -58,7 +58,7 @@ class Name {
 	}
 
 	animate(time, mouse, enableInteraction) {
-		const stdDevX = 0.25;
+		const stdDevX = 0.3;
 		const stdDevY = 2.5;
 
 		const shouldAnimateText = enableInteraction &&
