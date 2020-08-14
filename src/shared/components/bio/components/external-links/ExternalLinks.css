@@ -70,7 +70,7 @@
 	transform: translateX(-2rem);
 
 	&:hover {
-		color: var(--color-apricot);
+		color: var(--color-atomic-tangerine);
 	}
 }
 
@@ -78,7 +78,7 @@
 	transform: translateX(2rem);
 
 	&:hover {
-		color: var(--color-powder-blue);
+		color: var(--color-turquoise);
 	}
 }
 
