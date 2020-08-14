@@ -35,7 +35,7 @@ class App extends BaseApp {
 			<>
 				<Head>
 					<title>
-                        Gil Domingues
+                        Gil Domingues - Software Engineer
 					</title>
 					<meta name="description" content="Gil Domingues, a software engineer working in frontend, but passionate about the whole stack." />
 					<meta name="robots" content="index, follow" />
