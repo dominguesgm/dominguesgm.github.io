@@ -38,7 +38,7 @@ class App extends BaseApp {
                         Gil Domingues
 					</title>
 					<meta name="description" content="Gil Domingues, a software engineer passionate technology, from great user experiences to interesting low level problems.">
-					<meta name=”robots” content="index, follow">
+					<meta name="robots" content="index, follow">
 					<meta charset="UTF-8">
 					<meta name="keywords" content="software, engineer, developer, Gil, Domingues, freelance" />
 				</Head>
