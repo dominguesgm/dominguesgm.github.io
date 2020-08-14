@@ -54,4 +54,5 @@
 .name {
 	color: var(--color-white-smoke);
 	opacity: 0;
+	font-size: 9.1rem;
 }
