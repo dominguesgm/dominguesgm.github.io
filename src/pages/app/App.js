@@ -41,6 +41,7 @@ class App extends BaseApp {
 					<meta name="robots" content="index, follow" />
 					<meta charSet="UTF-8" />
 					<meta name="keywords" content="software, engineer, developer, Gil, Domingues, freelance" />
+					<link rel="canonical" href="https://gildomingues.dev" />
 				</Head>
 				<Component { ...pageProps } />
 			</>
