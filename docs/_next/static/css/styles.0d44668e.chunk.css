@@ -353,21 +353,21 @@ template {
     font-family: 'Montserrat';
     font-weight: 400;
     font-style: normal;
-    src: url(https://gildomingues.dev/_next/static/chunks/fonts/montserrat-regular-bc3aa95dca08f5fee5291e34959c27bc.woff2) format('woff2');
+    src: url(/_next/static/chunks/fonts/montserrat-regular-bc3aa95dca08f5fee5291e34959c27bc.woff2) format('woff2');
 }
 
 @font-face {
     font-family: 'Montserrat';
     font-weight: 500;
     font-style: normal;
-    src: url(https://gildomingues.dev/_next/static/chunks/fonts/montserrat-medium-92d16e458625f4d2c8940f6bdca0ff09.woff2) format('woff2');
+    src: url(/_next/static/chunks/fonts/montserrat-medium-92d16e458625f4d2c8940f6bdca0ff09.woff2) format('woff2');
 }
 
 @font-face {
     font-family: 'Montserrat';
     font-weight: 700;
     font-style: normal;
-    src: url(https://gildomingues.dev/_next/static/chunks/fonts/montserrat-bold-39d93cf678c740f9f6b2b1cfde34bee3.woff2) format('woff2');
+    src: url(/_next/static/chunks/fonts/montserrat-bold-39d93cf678c740f9f6b2b1cfde34bee3.woff2) format('woff2');
 }
 
 /* ==========================================================================
