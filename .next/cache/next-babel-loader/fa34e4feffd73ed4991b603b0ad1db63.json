@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './Bio';","map":{"version":3,"sources":["/Users/gil/Projects/dominguesgm.github.io/src/shared/components/bio/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,OAAxB","sourcesContent":["export { default } from './Bio';\n"]},"metadata":{},"sourceType":"module"}

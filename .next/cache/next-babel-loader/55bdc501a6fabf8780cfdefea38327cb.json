@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './App.js';","map":{"version":3,"sources":["/Users/gil/Projects/dominguesgm.github.io/src/pages/app/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,UAAxB","sourcesContent":["export { default } from './App.js';\n"]},"metadata":{},"sourceType":"module"}

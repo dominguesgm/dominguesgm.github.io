@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './Hero';","map":{"version":3,"sources":["/Users/gil/Projects/dominguesgm.github.io/src/shared/components/hero/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,QAAxB","sourcesContent":["export { default } from './Hero';\n"]},"metadata":{},"sourceType":"module"}
